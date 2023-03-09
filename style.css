@@ -1,8 +1,8 @@
-*{
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-size: 20px;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-size: 20px;
 }
 
 html {
@@ -10,67 +10,63 @@ html {
     font-size: 62.5%;
 }
 
-main{
-  padding: 0.5em 0.5em;
-  text-align: center;
-  border: red solid 2px;
-  font-size: 20px;
-  margin: 0.5em;
+main {
+    padding: 0.5em 0.5em;
+    text-align: center;
+    border: red solid 2px;
+    font-size: 20px;
+    margin: 0.5em;
 }
 
-.Kalender-container{
-margin-bottom: 1em;
-display: flex;
-justify-content: space-around;
+.Kalender-container {
+    margin-bottom: 1em;
+    display: flex;
+    justify-content: space-around;
 }
 
-.all-week-days{
-  margin-bottom: 0.5em;
-	display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-  gap: 0.5em;
-
+.all-week-days {
+    margin-bottom: 0.5em;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    gap: 0.5em;
 }
 
 .all-week-days > div {
     border: 1px solid rgba(0, 0, 0, 0.5);
-    border-radius: .25rem;
-      font-size: 16px;
+    border-radius: 0.25rem;
+    font-size: 16px;
 }
 
-.month-btn{
-  border: none;
-  padding: 0.3em 0.5em;
-  font-size: 18px;
-  background-color: rgb(71, 69, 69);
-  color: white;
-  border-radius: 5px;
-  cursor: pointer;
+.month-btn {
+    border: none;
+    padding: 0.3em 0.5em;
+    font-size: 18px;
+    background-color: rgb(71, 69, 69);
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
-.date-container{
-display:grid;
-grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-gap: 1rem;
+.date-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    gap: 1rem;
 }
 
-.date-container div{
-border: solid 2px rgb(14, 14, 14);
-min-height: 3rem;
-border-radius: .25rem;
-
+.date-container div {
+    border: solid 2px rgb(14, 14, 14);
+    min-height: 3rem;
+    border-radius: 0.25rem;
 }
 
 @media screen and (min-width: 480px) {
-.date-container div{
-  height: 6rem;
-
-}
+    .date-container div {
+        height: 6rem;
+    }
 }
 
 @media screen and (min-width: 768px) {
-  .date-container div{
-  height: 10rem;
-
-}
+    .date-container div {
+        height: 10rem;
+    }
 }
