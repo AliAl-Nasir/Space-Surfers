@@ -1,83 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="robots" content="index,follow" />
-    <meta name="description" content="En Kalenderwebbsida som visar datumet" />
-    <link rel="stylesheet" href="style.css" />
-    <script src="script.js" type="module"></script>
-    <link rel="shortcut icon" href="/Favicon/image.png" type="image/x-icon" />
-    <title>Kalender</title>
-  </head>
-  <body>
-    <header>Kalender</header>
-    <main>
-        <div class="Kalender-container">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="robots" content="index,follow" />
+        <meta
+            name="description"
+            content="En Kalenderwebbsida som visar datumet"
+        />
+        <link rel="stylesheet" href="style.css" />
+        <script src="script.js" type="module"></script>
+        <link
+            rel="shortcut icon"
+            href="/Favicon/image.png"
+            type="image/x-icon"
+        />
+        <title>Kalender</title>
+    </head>
+    <body>
+        <header>Kalender</header>
+        <main>
+            <div class="Kalender-container">
+                <button id="prev" class="month-btn">&#60;</button>
+                <div class="date">
+                    <p class="month"></p>
+                    <p class="year"></p>
+                </div>
+                <button id="next" class="month-btn">&#62;</button>
+            </div>
 
-        <button class="previous-month month-btn">  	&#60; </button>
-        <div class="datum">Mars 2023</div>
-        <button class="next-month month-btn">
-          &#62;
-        </button>
+            <!-- container för alla veckodagar -->
+            <div class="all-week-days">
+                <div>Må</div>
+                <div>Ti</div>
+                <div>On</div>
+                <div>To</div>
+                <div>Fr</div>
+                <div>Lö</div>
+                <div>Sö</div>
+            </div>
+            <div class="date-container"></div>
+        </main>
 
-      </div>
-
-      <!-- container för alla veckodagar -->
-      <div class="all-week-days">
-
-        <div>Må</div>
-        <div>Ti</div>
-        <div>On</div>
-        <div>To</div>
-        <div>Fr</div>
-        <div>Lö</div>
-        <div>Sö</div>
-
-      </div>
-	  <div class="date-container">
-		<div></div>
-		<div></div>
-		<div></div>
-		<div></div>
-		<div></div>
-		<div></div>
-		<div></div>
-		<div></div>
-		<div></div>
-		<div></div>
-		<div></div>
-		<div></div>
-		<div></div>
-		<div></div>
-		<div></div>
-		<div></div>
-		<div></div>
-		<div></div>
-		<div></div>
-		<div></div>
-		<div></div>
-		<div></div>
-		<div></div>
-		<div></div>
-		<div></div>
-		<div></div>
-		<div></div>
-		<div></div>
-		<div></div>
-		<div></div>
-		<div></div>
-		<div></div>
-		<div></div>
-		<div></div>
-		<div></div>
-		<div></div>
-	  </div>
-
-    </main>
-
-    <footer> <p> Skapad av Milad, David, Ali, Mustafa </footer>
-
-  </body>
+        <footer><p>Skapad av Milad, David, Ali, Mustafa</p></footer>
+    </body>
 </html>
