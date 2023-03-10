@@ -17,48 +17,42 @@ const monthNames = [
 //hämta element från DOM
 const dateContainer = document.querySelector(".date-container");
 const date = document.querySelector(".date");
-const nextMonthButton = document.querySelector(".next-month-btn");
-const prevMonthButton = document.querySelector(".previous-month-btn");
-
+const prevNextBtn = document.querySelectorAll(".Kalender-container .month-btn");
 //hämta datum
 let currentDate = new Date();
-//ligger en dag fel just nu
-// .toLocaleString("en-US", { timeZone: "CET" });
 let currentMonth = currentDate.getMonth();
 let currentYear = currentDate.getFullYear();
 
 generateDates();
 
-//klick för kanapparna att byta månad
-nextMonthButton.addEventListener("click", () => {
-    console.log("Next month button clicked");
-    // öka månad med ett steg
-    currentMonth++;
-    //om månaden är december (11) nollställ till januari (0) och öka årtalet med 1
-    if (currentMonth > 11) {
-        currentMonth = 0;
-        currentYear++;
-    }
-    //skapa kalender för den aktuella månaden
-    generateDates();
-});
-
-//samma fast tvärtemot den andra knappen
-prevMonthButton.addEventListener("click", () => {
-    console.log("Previous month button clicked");
-    currentMonth--;
-    if (currentMonth < 0) {
-        currentMonth = 11;
-        currentYear--;
-    }
-    generateDates();
+prevNextBtn.forEach((btn) => {
+    btn.addEventListener("click", () => {
+        currentMonth = btn.id === "prev" ? currentMonth - 1 : currentMonth + 1;
+        // om aktuell månad är mindre än 0 eller större än 11
+        if (currentMonth < 0 || currentMonth > 11) {
+            currentDate = new Date(currentYear, currentMonth);
+            currentYear = currentDate.getFullYear(); // Uppdaterar år
+            currentMonth = currentDate.getMonth(); // Uppdaterar månad
+        } else {
+            currentDate = new Date();
+        }
+        generateDates();
+    });
 });
 
 //skapar en kalender för en given månad och år
 function generateDates() {
-    console.log("Generating dates...");
-    console.log("Current month:", currentMonth);
-    console.log("Current year:", currentYear);
+    //Hämta datumen för föregående och kommande månad
+    const previousMonth = currentMonth === 0 ? 11 : currentMonth - 1;
+    const previousYear = currentMonth === 0 ? currentYear - 1 : currentYear;
+    const previousMonthEndDate = new Date(previousYear, previousMonth);
+    const previousMonthEndDay = previousMonthEndDate.getDay();
+    const previousMonthStartDate = new Date(
+        previousYear,
+        previousMonth,
+        1 - previousMonthEndDay + 1
+    );
+
     //tömmer kalender
     dateContainer.innerHTML = "";
     //anger månad och år
@@ -66,20 +60,50 @@ function generateDates() {
     //hämtar start och slutdatum för den givna månaden
     const startDate = new Date(currentYear, currentMonth, 1);
     const endDate = new Date(currentYear, currentMonth + 1, 0);
-    //Hämtar vilken veckodag som matchar startdatum för månaden
-    const startDay = startDate.getDay();
-    // lägger till tomma rutor för startdatum
+    //Hämtar vilken veckodag som matchar start/slutdatum för månaden
+    const startDay = (startDate.getDay() - 1 + 7) % 7;
+    const endDay = (endDate.getDay() - 1 + 7) % 7;
+
+    //lägger till datum från föregående månad
     for (let i = 0; i < startDay; i++) {
-        const blankCell = document.createElement("div");
-        blankCell.classList.add("date-cell", "blankcell");
-        dateContainer.appendChild(blankCell);
+        const previousMonthDateCell = document.createElement("div");
+        previousMonthDateCell.textContent =
+            previousMonthStartDate.getDate() + i;
+        previousMonthDateCell.classList.add("date-cell", "previous-month-cell");
+        dateContainer.appendChild(previousMonthDateCell);
     }
+
+    let currentDate = new Date(startDate);
     //lägger till alla celler för respektive datum och eventuella tomma celler
     while (currentDate <= endDate) {
-        // console.log("Current date:", currentDate);
         const dateCell = document.createElement("div");
         dateCell.textContent = currentDate.getDate();
+        dateCell.classList.add("date-cell", "current-month-cell");
         dateContainer.appendChild(dateCell);
         currentDate.setDate(currentDate.getDate() + 1);
     }
+
+    //lägger till datum från kommande månad
+    for (let i = 1; i <= 6 - endDay; i++) {
+        const nextMonthDateCell = document.createElement("div");
+        nextMonthDateCell.textContent = i;
+        nextMonthDateCell.classList.add("date-cell", "next-month-cell");
+        dateContainer.appendChild(nextMonthDateCell);
+    }
+
+    //itererar över månaden och väljer ut "idag" och ger klassen current-date
+    const today = new Date();
+    const dateCells = document.querySelectorAll(".date-cell");
+    dateCells.forEach((cell) => {
+        const cellDate = new Date(
+            currentYear,
+            currentMonth,
+            parseInt(cell.textContent)
+        );
+        if (cellDate.toDateString() === today.toDateString()) {
+            cell.classList.add("current-date");
+        } else {
+            cell.classList.remove("current-date");
+        }
+    });
 }

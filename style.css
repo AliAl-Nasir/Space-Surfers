@@ -59,6 +59,17 @@ main {
     border-radius: 0.25rem;
 }
 
+.previous-month-cell,
+.next-month-cell {
+    background-color: rgb(205, 205, 205);
+    color: black;
+}
+
+.current-date {
+    background-color: rgb(255, 122, 122);
+    color: white;
+}
+
 @media screen and (min-width: 480px) {
     .date-container div {
         height: 6rem;
