@@ -106,4 +106,37 @@ function generateDates() {
             cell.classList.remove("current-date");
         }
     });
+
+    // Exempel på en lista med röda dagar
+const redDays = [
+    new Date(currentYear, 0, 1),  // Nyårsdagen
+    new Date(currentYear, 3, 30), // Långfredagen
+    new Date(currentYear, 4, 1),  // Första maj
+    new Date(currentYear, 5, 6),  // Nationaldagen
+    new Date(currentYear, 5, 25), // Midsommardagen
+    new Date(currentYear, 11, 24),// Julafton
+    new Date(currentYear, 11, 25),// Juldagen
+    new Date(currentYear, 11, 26),// Annandag jul
+];
+
+
+// Loopar över varje datumcell
+    dateCells.forEach((cell) => {
+    // Hämtar datumet för den aktuella cellen
+    const cellDate = new Date(
+        currentYear,
+        currentMonth,
+        parseInt(cell.textContent)
+    );
+    // Kollar om cellens datum finns i listan med röda dagar
+    if (redDays.some(redDay => redDay.toDateString() === cellDate.toDateString())) {
+        cell.classList.add("red-day");
+    } else {
+        cell.classList.remove("red-day");
+    }
+});
 }
+
+
+
+

@@ -81,3 +81,7 @@ main {
         height: 10rem;
     }
 }
+
+.red-day{
+    background-color: red;
+}
