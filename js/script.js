@@ -1,3 +1,5 @@
+// import { addEvent } from "./Events.js";
+
 // Lista med månader
 const monthNames = [
     "januari",
@@ -18,6 +20,7 @@ const monthNames = [
 const dateContainer = document.querySelector(".date-container");
 const date = document.querySelector(".date");
 const prevNextBtn = document.querySelectorAll(".Kalender-container .month-btn");
+
 //hämta datum
 let currentDate = new Date();
 let currentMonth = currentDate.getMonth();
@@ -47,6 +50,8 @@ function generateDates() {
     const previousYear = currentMonth === 0 ? currentYear - 1 : currentYear;
     const previousMonthEndDate = new Date(previousYear, previousMonth);
     const previousMonthEndDay = previousMonthEndDate.getDay();
+
+    // denna rad beräknar datumen i förra månaden fel
     const previousMonthStartDate = new Date(
         previousYear,
         previousMonth,
@@ -55,6 +60,7 @@ function generateDates() {
 
     //tömmer kalender
     dateContainer.innerHTML = "";
+
     //anger månad och år
     date.textContent = `${monthNames[currentMonth]} ${currentYear}`;
     //hämtar start och slutdatum för den givna månaden

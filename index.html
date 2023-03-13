@@ -10,7 +10,9 @@
             content="En Kalenderwebbsida som visar datumet"
         />
         <link rel="stylesheet" href="style.css" />
-        <script src="script.js" type="module"></script>
+        <!-- <script src="/test.js" type="module"></script> -->
+        <script src="js/script.js" type="module"></script>
+        <script src="js/events.js" type="module"></script>
         <link
             rel="shortcut icon"
             href="/Favicon/image.png"
@@ -21,26 +23,28 @@
     <body>
         <header>Kalender</header>
         <main>
-            <div class="Kalender-container">
-                <button id="prev" class="month-btn">&#60;</button>
-                <div class="date">
-                    <p class="month"></p>
-                    <p class="year"></p>
+            <div class="main-container">
+                <div class="Kalender-container">
+                    <button id="prev" class="month-btn">&#60;</button>
+                    <div class="date">
+                        <p class="month"></p>
+                        <p class="year"></p>
+                    </div>
+                    <button id="next" class="month-btn">&#62;</button>
                 </div>
-                <button id="next" class="month-btn">&#62;</button>
-            </div>
 
-            <!-- container för alla veckodagar -->
-            <div class="all-week-days">
-                <div>Må</div>
-                <div>Ti</div>
-                <div>On</div>
-                <div>To</div>
-                <div>Fr</div>
-                <div>Lö</div>
-                <div>Sö</div>
+                <!-- container för alla veckodagar -->
+                <div class="all-week-days">
+                    <div>Må</div>
+                    <div>Ti</div>
+                    <div>On</div>
+                    <div>To</div>
+                    <div>Fr</div>
+                    <div>Lö</div>
+                    <div>Sö</div>
+                </div>
+                <div class="date-container"></div>
             </div>
-            <div class="date-container"></div>
         </main>
 
         <footer><p>Skapad av Milad, David, Ali, Mustafa</p></footer>
