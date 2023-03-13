@@ -50,7 +50,7 @@ function generateDates() {
     const previousMonthStartDate = new Date(
         previousYear,
         previousMonth,
-        1 - previousMonthEndDay + 1
+        1 - previousMonthEndDay - 1
     );
 
     //tömmer kalender
@@ -94,6 +94,7 @@ function generateDates() {
     //itererar över månaden och väljer ut "idag" och ger klassen current-date
     const today = new Date();
     const dateCells = document.querySelectorAll(".date-cell");
+    const dayOfMonth = document.querySelectorAll(".current-month-cell");
     dateCells.forEach((cell) => {
         const cellDate = new Date(
             currentYear,
@@ -121,7 +122,7 @@ const redDays = [
 
 
 // Loopar över varje datumcell
-    dateCells.forEach((cell) => {
+    dayOfMonth.forEach((cell) => {
     // Hämtar datumet för den aktuella cellen
     const cellDate = new Date(
         currentYear,
