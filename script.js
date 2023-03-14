@@ -110,7 +110,7 @@ function generateDates() {
     }
   });
 
-  // midsommar och allahelgona
+  
   function isLeapYear(year) {
     return year % 4 === 0 && (year % 100 !== 0 || year % 400 === 0);
   }
@@ -177,6 +177,8 @@ function generateDates() {
     ),
       // midsommardagen //fel är inte alltid på samma datum
     new Date(currentYear, 5, 24), 
+
+    // midsommar och allahelgona saknas
   ];
 
   // Loopar över varje datumcell
