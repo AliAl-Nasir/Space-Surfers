@@ -10,10 +10,19 @@ html {
     font-size: 62.5%;
 }
 
+header {
+    min-width: 100%;
+    display: flex;
+    justify-content: center;
+    font-size: 2.5rem;
+    font-weight: bold;
+}
+
 main {
     padding: 0.5em 0.5em;
     text-align: center;
     border: red solid 2px;
+    border-radius: 0.4rem;
     font-size: 20px;
     margin: 0.5em;
 }
@@ -35,6 +44,8 @@ main {
     border: 1px solid rgba(0, 0, 0, 0.5);
     border-radius: 0.25rem;
     font-size: 16px;
+    background-color: white;
+    box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.5);
 }
 
 .month-btn {
@@ -54,18 +65,23 @@ main {
 }
 
 .date-container div {
-    border: solid 2px rgb(14, 14, 14);
+    border: solid 1px rgb(0, 0, 0);
     min-height: 3rem;
     border-radius: 0.25rem;
+    background-color: white;
+    box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .previous-month-cell,
 .next-month-cell {
     background-color: rgb(205, 205, 205);
-    color: black;
+    color: white;
 }
 
-.current-date {
+.date-container > .current-date {
     background-color: rgb(24, 152, 232);
     color: white;
 }
@@ -88,4 +104,22 @@ main {
 
 .blank-cell{
     opacity: 0;
+}
+
+.vår{
+    background-image: url(/pictures/vår.png);
+    background-size: cover;
+}
+.sommar{
+    background-image: url(/pictures/sommar.jpeg);
+    background-size: cover;
+}
+.höst{
+    background-image: url(/pictures/fall-autumn-red-season.jpg);
+    background-size: cover;
+}
+
+.vinter{
+    background-image: url(/pictures/vinter.jpg);
+    background-size: cover;
 }
