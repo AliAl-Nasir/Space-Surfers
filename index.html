@@ -10,9 +10,8 @@
             content="En Kalenderwebbsida som visar datumet"
         />
         <link rel="stylesheet" href="style.css" />
-        <!-- <script src="/test.js" type="module"></script> -->
-        <script src="js/script.js" type="module"></script>
-        <script src="js/events.js" type="module"></script>
+        <script src="/script.js" type="module"></script>
+        <script src="/events.js" type="module"></script>
         <link
             rel="shortcut icon"
             href="/Favicon/image.png"
@@ -22,16 +21,13 @@
     </head>
     <body>
         <header>Kalender</header>
-        <main>
-            <div class="main-container">
-                <div class="Kalender-container">
-                    <button id="prev" class="month-btn">&#60;</button>
-                    <div class="date">
-                        <p class="month"></p>
-                        <p class="year"></p>
-                    </div>
-                    <button id="next" class="month-btn">&#62;</button>
+        <main class="main">
+            <div class="Kalender-container">
+                <button id="prev" class="month-btn">&#60;</button>
+                <div class="date">
                 </div>
+                <button id="next" class="month-btn">&#62;</button>
+            </div>
 
                 <!-- container för alla veckodagar -->
                 <div class="all-week-days">
