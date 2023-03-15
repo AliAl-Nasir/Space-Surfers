@@ -47,15 +47,15 @@ prevNextBtn.forEach((btn) => {
 //skapar en kalender för en given månad och år
 function generateDates() {
     //Hämta datumen för föregående och kommande månad
-    const previousMonth = currentMonth === 0 ? 11 : currentMonth - 1;
-    const previousYear = currentMonth === 0 ? currentYear - 1 : currentYear;
-    const previousMonthEndDate = new Date(previousYear, previousMonth);
-    const previousMonthEndDay = previousMonthEndDate.getMonth();
-    const previousMonthStartDate = new Date(
-        previousYear,
-        previousMonth,
-        1 - previousMonthEndDay - 0
-    );
+    // const previousMonth = currentMonth === 0 ? 11 : currentMonth - 1;
+    // const previousYear = currentMonth === 0 ? currentYear - 1 : currentYear;
+    // // const previousMonthEndDate = new Date(previousYear, previousMonth);
+    // // const previousMonthEndDay = previousMonthEndDate.getMonth();
+    // // const previousMonthStartDate = new Date(
+    // //     previousYear,
+    // //     previousMonth,
+    // //     1 - previousMonthEndDay - 0
+    // // );
     //   console.log(previousMonthStartDate.getDate());
 
     //tömmer kalender
@@ -68,7 +68,7 @@ function generateDates() {
     const endDate = new Date(currentYear, currentMonth + 1, 0);
     //Hämtar vilken veckodag som matchar start/slutdatum för månaden
     const startDay = (startDate.getDay() - 1 + 7) % 7;
-    const endDay = (endDate.getDay() - 1 + 7) % 7;
+    // const endDay = (endDate.getDay() - 1 + 7) % 7;
 
     //lägger till datum från föregående månad
     for (let i = 0; i < startDay; i++) {
@@ -91,12 +91,12 @@ function generateDates() {
     }
 
     // lägger till datum från kommande månad
-    for (let i = 1; i <= 6 - endDay; i++) {
-        const nextMonthDateCell = document.createElement("div");
-        // nextMonthDateCell.textContent = i;
-        nextMonthDateCell.classList.add("date-cell", "blank-cell");
-        dateContainer.appendChild(nextMonthDateCell);
-    }
+    // for (let i = 1; i <= 6 - endDay; i++) {
+    //     const nextMonthDateCell = document.createElement("div");
+    //     // nextMonthDateCell.textContent = i;
+    //     nextMonthDateCell.classList.add("date-cell", "blank-cell");
+    //     dateContainer.appendChild(nextMonthDateCell);
+    // }
 
     //itererar över månaden och väljer ut "idag" och ger klassen current-date
     const today = new Date();
@@ -275,7 +275,7 @@ function generateDates() {
         // midsommardagen //fel är inte alltid på samma datum
         new Date(currentYear, 5, 24),
 
-        // midsommar och allahelgona saknas
+        // midsommar (fredagen som infaller mellan 19–25 juni) och alla helgons dag (den lördag som infaller mellan den 31 oktober och 6 november.) saknas
     ];
 
     // Loopar över varje datumcell
