@@ -202,6 +202,16 @@ function generateDates() {
         return year % 4 === 0 && (year % 100 !== 0 || year % 400 === 0);
     }
 
+    //Uträkningen bygger på "Meeus/Jones/Butcher" - Algoritmen
+
+    //G is the "Golden Number" for the year (i.e., the year modulo 19).
+    //C is the "Century" (i.e., the year divided by 100, rounded down).
+    //H is related to the "Epact" (i.e., the age of the moon on January 1st of the year).
+    //I is the number of days between March 21 and the Paschal full moon.
+    //J is the weekday of the Paschal full moon (0=Sunday, 1=Monday, etc.).
+    //L is the number of days between March 21 and the Sunday on or before the Paschal full moon.
+    //month and day are the month and day of Easter, respectively.
+
     const Easter = getEaster(isLeapYear(currentYear));
     function getEaster(year) {
         let f = Math.floor,

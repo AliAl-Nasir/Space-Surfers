@@ -114,7 +114,7 @@ main {
     }
 }
 
-.red-day {
+.date-container > .red-day {
     background-color: red;
 }
 
