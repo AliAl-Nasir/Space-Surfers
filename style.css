@@ -3,6 +3,7 @@
     padding: 0;
     box-sizing: border-box;
     font-size: 20px;
+      font-family: "Inter", sans-serif;
 }
 
 html {
@@ -10,12 +11,8 @@ html {
     font-size: 62.5%;
 }
 
-header {
-    min-width: 100%;
-    display: flex;
-    justify-content: center;
-    font-size: 2.5rem;
-    font-weight: bold;
+body {
+    background-color: #1E212B;
 }
 
 header {
@@ -24,21 +21,76 @@ header {
     justify-content: center;
     font-size: 2.5rem;
     font-weight: bold;
+    color: white;
 }
+
 
 main {
+    width: 95%;
+    margin: auto;
     padding: 0.5em 0.5em;
     text-align: center;
-    border: red solid 2px;
+    border: rgb(77, 76, 76) solid 2px; 
     border-radius: 0.4rem;
     font-size: 20px;
     margin: 0.5em;
 }
 
+footer {
+    color: white;
+}
+
 .Kalender-container {
     margin-bottom: 1em;
     display: flex;
-    justify-content: space-around;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    gap: 1em;
+}
+
+.all-date-div{
+    display: flex;
+    justify-content: center;
+    gap: 2em;
+}
+
+.date {
+    max-width: 20rem;
+    min-width: 20rem;
+    background-color: #474545;
+    border-radius: .5rem;
+    color: white;
+    padding-top: .2em;
+}
+
+
+.search{
+    display: flex;
+    align-items: center;
+    gap: 1em;
+    flex-wrap: wrap;
+}
+
+i{
+    cursor: pointer;
+    padding: .5em .5em;
+    transition: background, color .4s;
+    border-radius: 50%;
+}
+i:hover{
+    padding: .5em .5em;
+    background:  #474545;
+    border-radius: 50%;
+    color: white;
+}
+
+#search-input{
+    display: none;
+    border-radius: 7px;
+    border: none;
+    width: 150px;
+    padding: .2em .2em;
 }
 
 .all-week-days {
@@ -65,6 +117,7 @@ main {
     border-radius: 5px;
     cursor: pointer;
 }
+
 
 .date-container {
     display: grid;
@@ -133,9 +186,12 @@ main {
 .höst {
     background-image: url(/pictures/fall-autumn-red-season.jpg);
     background-size: cover;
+
 }
 
 .vinter {
     background-image: url(/pictures/vinter.jpg);
     background-size: cover;
+    background-position: center ;
 }
+

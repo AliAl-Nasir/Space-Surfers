@@ -155,7 +155,7 @@ function generateDates() {
         main.classList.remove("höst");
     }
     // Sommar slutar här
-
+          
     // hösten börjar här
     if (date.innerHTML === `september ${currentYear}`) {
         main.classList.add("höst");
