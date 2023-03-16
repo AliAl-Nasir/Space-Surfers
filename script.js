@@ -22,7 +22,13 @@ const date = document.querySelector(".date");
 const dateYear = document.querySelector(".date-year");
 const prevNextBtn = document.querySelectorAll(".Kalender-container .month-btn");
 const main = document.querySelector("main");
-const searchInput = document.querySelector(".search-input")
+const searchInput = document.querySelector("#search-input");
+const magniGlass = document.querySelector(".fa-regular")
+
+
+// init toggles
+searchInput.classList.toggle("hide-toggle", true);
+
 //hämta datum
 let currentDate = new Date();
 let currentMonth = currentDate.getMonth();
@@ -47,66 +53,37 @@ prevNextBtn.forEach((btn) => {
 
 //skapar en kalender för en given månad och år
 function generateDates() {
-    //Hämta datumen för föregående och kommande månad
-    // const previousMonth = currentMonth === 0 ? 11 : currentMonth - 1;
-    // const previousYear = currentMonth === 0 ? currentYear - 1 : currentYear;
-    // // const previousMonthEndDate = new Date(previousYear, previousMonth);
-    // // const previousMonthEndDay = previousMonthEndDate.getMonth();
-    // // const previousMonthStartDate = new Date(
-    // //     previousYear,
-    // //     previousMonth,
-    // //     1 - previousMonthEndDay - 0
-    // // );
-    //   console.log(previousMonthStartDate.getDate());
 
     //tömmer kalender
     dateContainer.innerHTML = "";
+    
     //anger månad och år
-
     date.textContent = `${monthNames[currentMonth]} ${currentYear}`;
+    
     //hämtar start och slutdatum för den givna månaden
     const startDate = new Date(currentYear, currentMonth, 1);
     const endDate = new Date(currentYear, currentMonth + 1, 0);
-    //Hämtar vilken veckodag som matchar start/slutdatum för månaden
+    //Ändrar så att måndag är första dag i veckan
     const startDay = (startDate.getDay() - 1 + 7) % 7;
-    // const endDay = (endDate.getDay() - 1 + 7) % 7;
 
-    //lägger till datum från föregående månad
+
+    //lägger till tomma celler innan månaden
     for (let i = 0; i < startDay; i++) {
         const previousMonthDateCell = document.createElement("div");
-        // previousMonthDateCell.textContent =
-        //     previousMonthStartDate.getDay() + i;
-        // console.log(previousMonthStartDate.getDate())
         previousMonthDateCell.classList.add("date-cell", "blank-cell");
         dateContainer.appendChild(previousMonthDateCell);
     }
 
     let currentDate = new Date(startDate);
-    //lägger till alla celler för respektive datum och eventuella tomma celler
-    while (currentDate <= endDate) {
-        const dateCell = document.createElement("div");
-        dateCell.textContent = currentDate.getDate();
-        dateCell.classList.add("date-cell", "current-month-cell");
+    //lägger till alla celler för respektive datum och eventuella tomma celler i slutet
+   while (currentDate <= endDate) {
+    const dateCell = document.createElement("div");
+    dateCell.textContent = currentDate.getDate();
+    dateCell.classList.add("date-cell", "current-month-cell");
 
-        if (
-            currentDate.getMonth() === 5 &&
-            currentDate.getDate() >= 20 &&
-            currentDate.getDate() <= 26 &&
-            currentDate.getDay === 6 
-        ){
-            dateCell.classList.add("red-day")
-        }
-        dateContainer.appendChild(dateCell);
-        currentDate.setDate(currentDate.getDate() + 1);
-    }
-
-    // lägger till datum från kommande månad
-    // for (let i = 1; i <= 6 - endDay; i++) {
-    //     const nextMonthDateCell = document.createElement("div");
-    //     // nextMonthDateCell.textContent = i;
-    //     nextMonthDateCell.classList.add("date-cell", "blank-cell");
-    //     dateContainer.appendChild(nextMonthDateCell);
-    // }
+    dateContainer.appendChild(dateCell);
+    currentDate.setDate(currentDate.getDate() + 1);
+}
 
     //itererar över månaden och väljer ut "idag" och ger klassen current-date
     const today = new Date();
@@ -211,6 +188,14 @@ function generateDates() {
     function isLeapYear(year) {
         return year % 4 === 0 && (year % 100 !== 0 || year % 400 === 0);
     }
+//räknar ut midsommardagen
+   function getMidsommardagenDate(currentYear) {
+        const june20th = new Date(currentYear, 5, 20);
+        const daysUntilSaturday = (6 - june20th.getDay()) % 7;
+        const midsommardagen = new Date(currentYear, 5, 20 + daysUntilSaturday);
+        return midsommardagen;
+        }   
+        console.log(getMidsommardagenDate(2024))
 
     //Uträkningen bygger på "Meeus/Jones/Butcher" - Algoritmen
 
@@ -221,7 +206,6 @@ function generateDates() {
     //J is the weekday of the Paschal full moon (0=Sunday, 1=Monday, etc.).
     //L is the number of days between March 21 and the Sunday on or before the Paschal full moon.
     //month and day are the month and day of Easter, respectively.
-
     const Easter = getEaster(isLeapYear(currentYear));
     function getEaster(year) {
         let f = Math.floor,
@@ -238,73 +222,82 @@ function generateDates() {
             L = I - J,
             month = 3 + f((L + 40) / 44),
             day = L + 28 - 31 * f(month / 4);
-
-        return [month, day];
-    }
-
-    console.log(currentDate.getMonth());
-
-    //   console.log(getEaster(currentYear)[0] - 2);
-    const redDays = [
-        new Date(currentYear, 0, 1), // Nyårsdagen
-        new Date(currentYear, 0, 6), // trettondagen
-        new Date(currentYear, 4, 1), // Första maj
-        new Date(currentYear, 5, 6), // Nationaldagen
-        new Date(currentYear, 11, 25), // Juldagen
-        new Date(currentYear, 11, 26), // Annandag jul
-        //långfredagen
-        new Date(
-            currentYear,
-            getEaster(currentYear)[0] - 1,
-            getEaster(currentYear)[1] - 2
-        ),
-        //Påskdagen
-        new Date(
-            currentYear,
-            getEaster(currentYear)[0] - 1,
-            getEaster(currentYear)[1] - 0
-        ),
-        //Annandag påsk
-        new Date(
-            currentYear,
-            getEaster(currentYear)[0] - 1,
-            getEaster(currentYear)[1] + 1
-        ),
-        // Kristi himmelsfärdsdag
-        new Date(
-            currentYear,
-            getEaster(currentYear)[0] - 1,
-            getEaster(currentYear)[1] + 39
-        ),
-        //Pingst
-        new Date(
-            currentYear,
-            getEaster(currentYear)[0] - 1,
-            getEaster(currentYear)[1] + 49
-        ),
-        // midsommardagen //fel är inte alltid på samma datum
-        new Date(currentYear, 5, 24),
-
-        // midsommar (fredagen som infaller mellan 19–25 juni) och alla helgons dag (den lördag som infaller mellan den 31 oktober och 6 november.) saknas
-    ];
-
-    // Loopar över varje datumcell
-    dayOfMonth.forEach((cell) => {
-        // Hämtar datumet för den aktuella cellen
-        const cellDate = new Date(
-            currentYear,
-            currentMonth,
-            parseInt(cell.textContent)
-        );
-        // Kollar om cellens datum finns i listan med röda dagar
-        if (
+            
+            return [month, day];
+          }
+          
+          // console.log(currentDate.getMonth());
+            
+          
+          //   console.log(getEaster(currentYear)[0] - 2);
+          const redDays = [
+            new Date(currentYear, 0, 1), // Nyårsdagen
+            new Date(currentYear, 0, 6), // trettondagen
+            new Date(currentYear, 4, 1), // Första maj
+            new Date(currentYear, 5, 6), // Nationaldagen
+            new Date(currentYear, 11, 25), // Juldagen
+            new Date(currentYear, 11, 26), // Annandag jul
+            new Date(currentYear, 
+              getMidsommardagenDate(currentYear) 
+              ),
+              
+            //långfredagen
+            new Date(
+              currentYear,
+              getEaster(currentYear)[0] - 1,
+              getEaster(currentYear)[1] - 2
+              ),
+              //Påskdagen
+              new Date(
+                currentYear,
+                getEaster(currentYear)[0] - 1,
+                getEaster(currentYear)[1] - 0
+                ),
+                //Annandag påsk
+                new Date(
+                  currentYear,
+                  getEaster(currentYear)[0] - 1,
+                  getEaster(currentYear)[1] + 1
+                  ),
+                  // Kristi himmelsfärdsdag
+                  new Date(
+                    currentYear,
+                    getEaster(currentYear)[0] - 1,
+                    getEaster(currentYear)[1] + 39
+                    ),
+                    //Pingst
+                    new Date(
+                      currentYear,
+                      getEaster(currentYear)[0] - 1,
+                      getEaster(currentYear)[1] + 49
+                      ),
+                      
+                      // midsommar (lördagen som infaller mellan 20–26 juni) och alla helgons dag (den lördag som infaller mellan den 31 oktober och 6 november.) saknas samt alla söndagar
+                    ];
+                    
+                    // Loopar över varje datumcell
+                    dayOfMonth.forEach((cell) => {
+                      // Hämtar datumet för den aktuella cellen
+                      const cellDate = new Date(
+                        currentYear,
+                        currentMonth,
+                        parseInt(cell.textContent)
+                        );
+                        // Kollar om cellens datum finns i listan med röda dagar
+                        if (
             redDays.some(
                 (redDay) => redDay.toDateString() === cellDate.toDateString()
-            )
-        ) {
-            cell.classList.add("red-day");
-        } else {
-            cell.classList.remove("red-day");
-        }
-    });
-}
+                )
+                ) {
+                  cell.classList.add("red-day");
+                } else {
+                  cell.classList.remove("red-day");
+                }
+              });
+            }
+            
+            magniGlass.addEventListener("click", () => {
+              searchInput.classList.toggle("hide-toggle");
+              searchInput.focus()
+            }) 
+            

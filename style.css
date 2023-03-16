@@ -36,9 +36,7 @@ main {
     margin: 0.5em;
 }
 
-footer {
-    color: white;
-}
+
 
 .Kalender-container {
     margin-bottom: 1em;
@@ -68,16 +66,21 @@ footer {
 .search{
     display: flex;
     align-items: center;
-    gap: 1em;
+    gap: 0.5em;
     flex-wrap: wrap;
 }
 
 i{
+    position: relative;
+    font-size: 30px;
     cursor: pointer;
     padding: .5em .5em;
     transition: background, color .4s;
     border-radius: 50%;
-}
+    top: 0em;
+    left: 0;
+    }
+
 i:hover{
     padding: .5em .5em;
     background:  #474545;
@@ -86,12 +89,104 @@ i:hover{
 }
 
 #search-input{
-    display: none;
     border-radius: 7px;
     border: none;
     width: 150px;
     padding: .2em .2em;
 }
+
+.flytta-höger{
+    position: relative;
+    animation-name: flytta;
+    animation-duration: 4s;
+}
+
+@keyframes flytta{
+    from {left: 0;}
+    to {left: 5;}
+}
+
+#prev {
+    display: block;
+    border: none;
+    padding: 0.3em 0.5em;
+    font-size: 18px;
+    background-color: rgb(71, 69, 69);
+    color: white;
+    border-radius: 3px;
+    cursor: pointer;
+    text-decoration: none;
+    text-align: center;
+    position: relative;
+    transition: all .35s;
+}
+
+#prev > span {
+    position: relative;
+    z-index: 2;
+}
+
+#prev:after {
+    position: absolute;
+    content: "";
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    border-radius: 3px;
+    background: rgba(71, 69, 69);
+    transition: all .35s;
+}
+
+#prev:hover {
+    color: white;
+}
+
+#prev:hover:after {
+    width: 100%;
+}
+
+#next {
+    display: block;
+    border: none;
+    padding: 0.3em 0.5em;
+    font-size: 18px;
+    background-color: rgb(71, 69, 69);
+    color: white;
+    border-radius: 3px;
+    cursor: pointer;
+    text-decoration: none;
+    text-align: center;
+    position: relative;
+    transition: all .35s;
+}
+
+#next > span {
+    position: relative;
+    z-index: 2;
+}
+
+#next:after {
+    position: absolute;
+    content: "";
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    border-radius: 3px;
+    background: #383838;
+    transition: all .35s;
+}
+
+#next:hover {
+    color: white;
+}
+
+#next:hover:after {
+    width: 100%;
+}
+   
+    
 
 .all-week-days {
     margin-bottom: 0.5em;
@@ -108,7 +203,7 @@ i:hover{
     box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.5);
 }
 
-.month-btn {
+/* .month-btn {
     border: none;
     padding: 0.3em 0.5em;
     font-size: 18px;
@@ -116,7 +211,7 @@ i:hover{
     color: white;
     border-radius: 5px;
     cursor: pointer;
-}
+} */
 
 
 .date-container {
@@ -155,17 +250,6 @@ i:hover{
     background-color: hotpink;
 }
 
-@media screen and (min-width: 480px) {
-    .date-container div {
-        height: 6rem;
-    }
-}
-
-@media screen and (min-width: 768px) {
-    .date-container div {
-        height: 10rem;
-    }
-}
 
 .date-container > .red-day {
     background-color: red;
@@ -175,6 +259,9 @@ i:hover{
     opacity: 0;
 }
 
+
+
+/* Bakgrundsbilder till kalendern börjar här*/
 .vår {
     background-image: url(/pictures/vår.png);
     background-size: cover;
@@ -186,7 +273,7 @@ i:hover{
 .höst {
     background-image: url(/pictures/fall-autumn-red-season.jpg);
     background-size: cover;
-
+    
 }
 
 .vinter {
@@ -194,4 +281,36 @@ i:hover{
     background-size: cover;
     background-position: center ;
 }
+/* Bakgrundsbilder till kalendern slutar här*/
 
+
+
+/* toggle klasser nedan */
+.hide-toggle {
+    display: none;
+}
+/* toggle klasser slutar här*/
+
+
+
+/* Footer här nedan*/
+footer {
+    color: white;
+    text-align: center;
+    min-width: 100%;
+}
+/* Footer slutar här */
+
+
+/* Media Q här nedan*/
+@media screen and (min-width: 480px) {
+    .date-container div {
+        height: 6rem;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .date-container div {
+        height: 10rem;
+    }
+}
