@@ -22,6 +22,7 @@ const date = document.querySelector(".date");
 const dateYear = document.querySelector(".date-year");
 const prevNextBtn = document.querySelectorAll(".Kalender-container .month-btn");
 const main = document.querySelector("main");
+const searchInput = document.querySelector(".search-input")
 //hämta datum
 let currentDate = new Date();
 let currentMonth = currentDate.getMonth();
@@ -86,6 +87,15 @@ function generateDates() {
         const dateCell = document.createElement("div");
         dateCell.textContent = currentDate.getDate();
         dateCell.classList.add("date-cell", "current-month-cell");
+
+        if (
+            currentDate.getMonth() === 5 &&
+            currentDate.getDate() >= 20 &&
+            currentDate.getDate() <= 26 &&
+            currentDate.getDay === 6 
+        ){
+            dateCell.classList.add("red-day")
+        }
         dateContainer.appendChild(dateCell);
         currentDate.setDate(currentDate.getDate() + 1);
     }
