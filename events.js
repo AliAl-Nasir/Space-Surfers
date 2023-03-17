@@ -1,8 +1,9 @@
 // export { addEvent };
 
-// function addEvent() {
+ //function addEvent() {
 const dateCells = document.querySelectorAll(".date-cell");
-const mainContainer = document.querySelector(".main-container");
+const datecell = document.querySelector('.current-month-cell')
+//const mainContainer = document.querySelector(".main-container"); vart den  html element kommer ifrån
 
 dateCells.forEach((dateCell) => {
     dateCell.addEventListener("click", () => {
@@ -10,12 +11,13 @@ dateCells.forEach((dateCell) => {
         const createEventContainer = document.createElement("section");
         createEventContainer.className = "event-container";
 
+
         mainContainer.appendChild(createEventContainer);
 
         //lägga till elementet, till höger på stor skärm, under på mindre.
     });
 });
-// }
+ 
 
 // addEvent();
 

@@ -103,6 +103,9 @@ main {
     bottom: 37rem;
     z-index: 1;
 }
+.event-btn{
+    justify-content: end;
+}
 .event-done-btn{
 
     border: none;
@@ -111,6 +114,27 @@ main {
     
     
 }
+
+.event-content-box {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 70%;
+    height: 70%;
+    background-color: white;
+    border-radius: .25rem;
+}
+
+.close-contentbox-btn {
+   background-color: unset;
+   border: none;
+   color: red;
+   cursor: pointer;
+   font-size: 2rem;
+   margin: 2rem 0;
+}
+
 .flytta-höger{
     position: relative;
     animation-name: flytta;
@@ -231,13 +255,14 @@ main {
 
 
 .date-container {
+    position: relative;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
     gap: 1rem;
 }
 
 .date-container div {
-    border: solid 1px rgb(0, 0, 0);
+    border:none;
     min-height: 3rem;
     border-radius: 0.25rem;
     background-color: white;
