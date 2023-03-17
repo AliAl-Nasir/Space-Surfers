@@ -195,7 +195,7 @@ function generateDates() {
         const midsommardagen = new Date(currentYear, 5, 20 + daysUntilSaturday);
         return midsommardagen;
         }   
-        console.log(getMidsommardagenDate(2024))
+        console.log(getMidsommardagenDate(2026))
 
     //Uträkningen bygger på "Meeus/Jones/Butcher" - Algoritmen
 
@@ -206,6 +206,7 @@ function generateDates() {
     //J is the weekday of the Paschal full moon (0=Sunday, 1=Monday, etc.).
     //L is the number of days between March 21 and the Sunday on or before the Paschal full moon.
     //month and day are the month and day of Easter, respectively.
+
     const Easter = getEaster(isLeapYear(currentYear));
     function getEaster(year) {
         let f = Math.floor,
