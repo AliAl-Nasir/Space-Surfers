@@ -17,6 +17,7 @@ const monthNames = [
 ];
 
 //hämta element från DOM
+const body = document.querySelector("body");
 const dateContainer = document.querySelector(".date-container");
 const date = document.querySelector(".date");
 const dateYear = document.querySelector(".date-year");
@@ -81,9 +82,78 @@ function generateDates() {
     dateCell.textContent = currentDate.getDate();
     dateCell.classList.add("date-cell", "current-month-cell");
 
+    
+
+    const plusBtn = document.createElement("button")
+    plusBtn.innerHTML = `
+    <i> &#10010; </i>
+    `
+    plusBtn.classList.add("event-btn")
+    plusBtn.classList.toggle("hide-toggle", true);
+    
+    dateCell.appendChild(plusBtn)
     dateContainer.appendChild(dateCell);
     currentDate.setDate(currentDate.getDate() + 1);
 }
+let allDateCells = document.querySelectorAll(".date-cell")
+for (let i = 0; i < allDateCells.length; i++) {
+    let dateCell = allDateCells[i]
+    dateCell.addEventListener("click", () => {
+        let plusBtn = dateCell.lastChild
+        plusBtn.classList.toggle("hide-toggle")
+    })
+}
+
+let eventPopUp = document.createElement("section")
+eventPopUp.classList.add('popup-event')
+eventPopUp.innerHTML= `
+<textarea class="event-text-area" rows="5" cols="50"></textarea>
+<button class="event-done-btn">Klar</button>
+`
+
+eventPopUp.classList.toggle("hide-toggle")
+let allPlusBtn = document.querySelectorAll(".event-btn")
+for (let i=0; i < allPlusBtn.length; i++) {
+    let plusBtn = allPlusBtn[i]
+    let textArea = document.querySelector(".event-text-area")
+    main.append(eventPopUp)
+    plusBtn.addEventListener("click", event => {
+        event.stopPropagation()
+        eventPopUp.classList.toggle("hide-toggle")
+        textArea.value = ""
+
+        let eventDoneBtn = document.querySelector(".event-done-btn")
+        eventDoneBtn.addEventListener("click", () => {
+            let eventContentBox = document.createElement("div")
+            eventContentBox.classList.add("event-content-box")
+
+            let eventContentBoxClose = document.createElement("button")
+            eventContentBoxClose.innerHTML = `
+            <i> &#10006;</i>
+            `
+            eventContentBoxClose.classList.add("close-contentbox-btn")
+
+
+
+            let eventContent = document.createElement("p")
+            eventContent.classList.add("event-content")
+            eventContent.innerText =  ` ${textArea.value}`
+
+            eventContentBox.append(eventContentBoxClose)
+            eventContentBox.append(eventContent)
+            main.append(eventContentBox)
+
+            eventPopUp.classList.toggle("hide-toggle")
+
+        })
+    })
+}
+
+
+// plusBtn.forEach((dataCell) =>{
+    
+// })
+
 
     //itererar över månaden och väljer ut "idag" och ger klassen current-date
     const today = new Date();

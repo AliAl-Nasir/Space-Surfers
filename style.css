@@ -26,6 +26,8 @@ header {
 
 
 main {
+    display: flex;
+    flex-direction: column;
     width: 95%;
     margin: auto;
     padding: 0.5em 0.5em;
@@ -70,7 +72,7 @@ main {
     flex-wrap: wrap;
 }
 
-i{
+.flytta-höger{
     position: relative;
     font-size: 30px;
     cursor: pointer;
@@ -81,7 +83,7 @@ i{
     left: 0;
     }
 
-i:hover{
+.flytta-höger:hover {
     padding: .5em .5em;
     background:  #474545;
     border-radius: 50%;
@@ -95,6 +97,20 @@ i:hover{
     padding: .2em .2em;
 }
 
+.popup-event{
+    
+    position: relative;
+    bottom: 37rem;
+    z-index: 1;
+}
+.event-done-btn{
+
+    border: none;
+    padding: 0.4em;
+    
+    
+    
+}
 .flytta-höger{
     position: relative;
     animation-name: flytta;
@@ -227,8 +243,16 @@ i:hover{
     background-color: white;
     box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.5);
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
+}
+
+.date-container > div > button {
+    border: none;
+    background-color: unset;
+    cursor: pointer;
+    font-style: normal;
 }
 
 .previous-month-cell,
