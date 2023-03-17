@@ -221,7 +221,6 @@ i:hover{
 }
 
 .date-container div {
-    border: solid 1px rgb(0, 0, 0);
     min-height: 3rem;
     border-radius: 0.25rem;
     background-color: white;
@@ -238,7 +237,7 @@ i:hover{
 }
 
 .date-container > .current-date {
-    background-color: rgb(24, 152, 232);
+    background-color: rgb(72, 185, 255);
     color: white;
 }
 
@@ -252,7 +251,7 @@ i:hover{
 
 
 .date-container > .red-day {
-    background-color: red;
+    background-color: rgb(255, 101, 101);
 }
 
 .blank-cell {
@@ -283,6 +282,14 @@ i:hover{
 }
 /* Bakgrundsbilder till kalendern slutar här*/
 
+/* Ger röd dag till söndagar */
+.date-container :nth-child(7n+7), 
+.date-container :nth-child(7n+14), 
+.date-container :nth-child(7n+21), 
+.date-container :nth-child(7n+28), 
+.date-container :nth-child(7n+35) {
+    background-color: rgb(255, 101, 101);
+}
 
 
 /* toggle klasser nedan */
