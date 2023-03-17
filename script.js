@@ -1,4 +1,6 @@
 // import { addEvent } from "./Events.js";
+import { toggleSearchInput } from './searchdate.js';
+
 
 // Lista med månader
 const monthNames = [
@@ -17,16 +19,13 @@ const monthNames = [
 ];
 
 //hämta element från DOM
+const days = document.querySelectorAll(".current-month-cell")
 const dateContainer = document.querySelector(".date-container");
 const date = document.querySelector(".date");
 const dateYear = document.querySelector(".date-year");
 const prevNextBtn = document.querySelectorAll(".Kalender-container .month-btn");
 const main = document.querySelector("main");
-const searchInput = document.querySelector("#search-input");
-const magniGlass = document.querySelector(".fa-regular");
 
-// init toggles
-searchInput.classList.toggle("hide-toggle", true);
 
 //hämta datum
 let currentDate = new Date();
@@ -34,6 +33,10 @@ let currentMonth = currentDate.getMonth();
 let currentYear = currentDate.getFullYear();
 
 generateDates();
+
+
+
+
 
 prevNextBtn.forEach((btn) => {
   btn.addEventListener("click", () => {
@@ -193,40 +196,6 @@ function generateDates() {
   const oct31st = new Date(currentYear, 9, 31);
   const daysUntilSaturdayNovember = (6 - oct31st.getDay()) % 7;
 
-  //Tar reda på om det är söndag
-  // let isSunday = new Date (currentMonth ,8)
-  // let d =isSunday.getDay()
-  // console.log(currentMonth, d)
-
-  function getSundaysInMonth(currentMonth, currentYear) {
-    const sundays = [];
-
-    // Skapa ett nytt Date-objekt för den första dagen i månaden
-    const firstDayOfMonth = new Date(currentYear, currentMonth, 1);
-
-    // Loopa igenom alla dagar i månaden
-    for (let i = 1; i <= 31; i++) {
-      // Skapa ett nytt Date-objekt för den aktuella dagen
-      const currentDate = new Date(currentYear, currentMonth, i);
-
-      // Om aktuell dag inte är i samma månad som den första dagen,
-      // bryt loopen (detta förhindrar att loopen fortsätter till nästa månad)
-      if (currentDate.getMonth() !== currentMonth) {
-        break;
-      }
-
-      // Om aktuell dag är en söndag, lägg till datumet till arrayen "sundays"
-      if (currentDate.getDay() === 0) {
-        sundays.push(currentDate);
-      }
-    }
-
-    return sundays;
-  }
-  //   console.log(getSundaysInMonth(currentMonth,currentYear));
-  // Hämta alla söndagar i maj
-  
-
   //Uträkningen bygger på "Meeus/Jones/Butcher" - Algoritmen
 
   //G is the "Golden Number" for the year (i.e., the year modulo 19).
@@ -265,8 +234,7 @@ function generateDates() {
     new Date(currentYear, 11, 25), // Juldagen
     new Date(currentYear, 11, 26), // Annandag jul
     new Date(currentYear, 5, 20 + daysUntilSaturday), // Midsommardagen
-    new Date(currentYear, 9, 31 + daysUntilSaturdayNovember),
-    // new Date(currentYear, isSunday), //söndag
+    new Date(currentYear, 9, 31 + daysUntilSaturdayNovember), // Alla helgons dag
 
     //långfredagen
     new Date(
@@ -298,34 +266,7 @@ function generateDates() {
       getEaster(currentYear)[0] - 1,
       getEaster(currentYear)[1] + 49
     ),
-    new Date(getSundaysInMonth(0, 2023)),
   ];
-
-  const sundaysInJan = getSundaysInMonth(0, currentYear);
-  const sundaysInFeb = getSundaysInMonth(1, currentYear);
-  const sundaysInMar = getSundaysInMonth(2, currentYear);
-  const sundaysInApr = getSundaysInMonth(3, currentYear);
-  const sundaysInMay = getSundaysInMonth(4, currentYear);
-  const sundaysInJune = getSundaysInMonth(5, currentYear);
-  const sundaysInJuli = getSundaysInMonth(6, currentYear);
-  const sundaysInAug = getSundaysInMonth(7, currentYear);
-  const sundaysInSep = getSundaysInMonth(8, currentYear);
-  const sundaysInOkt = getSundaysInMonth(9, currentYear);
-  const sundaysInNov = getSundaysInMonth(10, currentYear);
-  const sundaysInDec = getSundaysInMonth(11, currentYear);
-
-  // Lägg till alla söndagar i arrayen "redDays"
-//   redDays.push(...sundaysInJan,
-//      ...sundaysInFeb, 
-//      ...sundaysInMar, 
-//      ...sundaysInApr, 
-//      ...sundaysInMay,
-//      ...sundaysInJune,
-//      ...sundaysInJuli,
-//      ...sundaysInAug
-     
-    
-//     );
 
   // Loopar över varje datumcell
   dayOfMonth.forEach((cell) => {
@@ -348,7 +289,4 @@ function generateDates() {
   });
 }
 
-magniGlass.addEventListener("click", () => {
-  searchInput.classList.toggle("hide-toggle");
-  searchInput.focus();
-});
+toggleSearchInput();

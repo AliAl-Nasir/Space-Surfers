@@ -50,7 +50,7 @@ main {
 .all-date-div{
     display: flex;
     justify-content: center;
-    gap: 2em;
+    gap: 0.5em;
 }
 
 .date {
@@ -313,11 +313,27 @@ footer {
 @media screen and (min-width: 480px) {
     .date-container div {
         height: 6rem;
+
+        
     }
+
+    .all-date-div{
+    display: flex;
+    justify-content: center;
+    gap: 1em;
+}
+
 }
 
 @media screen and (min-width: 768px) {
     .date-container div {
         height: 10rem;
     }
+
+    .all-date-div{
+    display: flex;
+    justify-content: center;
+    gap: 2 em;
+}
+
 }
