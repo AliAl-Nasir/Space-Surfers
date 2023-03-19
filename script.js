@@ -1,5 +1,7 @@
 // import { addEvent } from "./Events.js";
 import { toggleSearchInput } from './searchdate.js';
+import { idGenerator } from './searchdate.js';
+import { updateIds } from './searchdate.js';
 
 
 // Lista med månader
@@ -16,7 +18,9 @@ const monthNames = [
   "oktober",
   "november",
   "december",
+ 
 ];
+
 
 //hämta element från DOM
 const days = document.querySelectorAll(".current-month-cell")
@@ -50,11 +54,15 @@ prevNextBtn.forEach((btn) => {
       currentDate = new Date();
     }
     generateDates();
+    updateIds()
+    idGenerator()
+    toggleSearchInput()
   });
 });
 
 //skapar en kalender för en given månad och år
 function generateDates() {
+ 
   //tömmer kalender
   dateContainer.innerHTML = "";
 
@@ -287,6 +295,8 @@ function generateDates() {
       cell.classList.remove("red-day");
     }
   });
+  idGenerator()
+  updateIds()
+  toggleSearchInput();
 }
 
-toggleSearchInput();
