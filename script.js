@@ -3,6 +3,7 @@ import { toggleSearchInput } from './searchdate.js';
 import { idGenerator } from './searchdate.js';
 import { updateIds } from './searchdate.js';
 import {calenderInput } from './searchdate.js';
+import { dateObject } from './searchdate.js';
 
 
 
@@ -33,11 +34,6 @@ const prevNextBtn = document.querySelectorAll(".Kalender-container .month-btn");
 const main = document.querySelector("main");
 
 
-//hämta datum
-let currentDate = new Date();
-let currentMonth = currentDate.getMonth();
-let currentYear = currentDate.getFullYear();
-
 generateDates();
 
 
@@ -46,14 +42,14 @@ generateDates();
 
 prevNextBtn.forEach((btn) => {
   btn.addEventListener("click", () => {
-    currentMonth = btn.id === "prev" ? currentMonth - 1 : currentMonth + 1;
+    dateObject.currentMonth = btn.id === "prev" ? dateObject.currentMonth - 1 : dateObject.currentMonth + 1;
     // om aktuell månad är mindre än 0 eller större än 11
-    if (currentMonth < 0 || currentMonth > 11) {
-      currentDate = new Date(currentYear, currentMonth);
-      currentYear = currentDate.getFullYear(); // Uppdaterar år
-      currentMonth = currentDate.getMonth(); // Uppdaterar månad
+    if (dateObject.currentMonth < 0 || dateObject.currentMonth > 11) {
+      dateObject.currentDate = new Date(dateObject.currentYear, dateObject.currentMonth);
+      dateObject.currentYear = dateObject.currentDate.getFullYear(); // Uppdaterar år
+      dateObject.currentMonth = dateObject.currentDate.getMonth(); // Uppdaterar månad
     } else {
-      currentDate = new Date();
+      dateObject.currentDate = new Date();
     }
     generateDates();
     updateIds()
@@ -77,15 +73,15 @@ function generateDates() {
 
 // })
 
-  //tömmer kalender
+	//tömmer kalender
   dateContainer.innerHTML = "";
 
   //anger månad och år
-  date.textContent = `${monthNames[currentMonth]} ${currentYear}`;
+  date.textContent = `${monthNames[dateObject.currentMonth]} ${dateObject.currentYear}`;
 
   //hämtar start och slutdatum för den givna månaden
-  const startDate = new Date(currentYear, currentMonth, 1);
-  const endDate = new Date(currentYear, currentMonth + 1, 0);
+  const startDate = new Date(dateObject.currentYear, dateObject.currentMonth, 1);
+  const endDate = new Date(dateObject.currentYear, dateObject.currentMonth + 1, 0);
   //Ändrar så att måndag är första dag i veckan
   const startDay = (startDate.getDay() - 1 + 7) % 7;
 
@@ -113,8 +109,8 @@ function generateDates() {
   const dayOfMonth = document.querySelectorAll(".current-month-cell");
   dateCells.forEach((cell) => {
     const cellDate = new Date(
-      currentYear,
-      currentMonth,
+        dateObject.currentYear,
+        dateObject.currentMonth,
       parseInt(cell.textContent)
     );
     if (cellDate.toDateString() === today.toDateString()) {
@@ -124,19 +120,19 @@ function generateDates() {
     }
   });
   // vår börjar här
-  if (date.textContent === `mars ${currentYear}`) {
+  if (date.textContent === `mars ${dateObject.currentYear}`) {
     main.classList.add("vår");
     main.classList.remove("vinter");
     main.classList.remove("sommar");
     main.classList.remove("höst");
   }
-  if (date.textContent === `april ${currentYear}`) {
+  if (date.textContent === `april ${dateObject.currentYear}`) {
     main.classList.add("vår");
     main.classList.remove("vinter");
     main.classList.remove("sommar");
     main.classList.remove("höst");
   }
-  if (date.textContent === `maj ${currentYear}`) {
+  if (date.textContent === `maj ${dateObject.currentYear}`) {
     main.classList.add("vår");
     main.classList.remove("vinter");
     main.classList.remove("sommar");
@@ -145,19 +141,19 @@ function generateDates() {
   // vår slutar här
 
   // Sommar börjar här
-  if (date.innerHTML === `juni ${currentYear}`) {
+  if (date.innerHTML === `juni ${dateObject.currentYear}`) {
     main.classList.add("sommar");
     main.classList.remove("vår");
     main.classList.remove("vinter");
     main.classList.remove("höst");
   }
-  if (date.innerHTML === `juli ${currentYear}`) {
+  if (date.innerHTML === `juli ${dateObject.currentYear}`) {
     main.classList.add("sommar");
     main.classList.remove("vår");
     main.classList.remove("vinter");
     main.classList.remove("höst");
   }
-  if (date.innerHTML === `augusti ${currentYear}`) {
+  if (date.innerHTML === `augusti ${dateObject.currentYear}`) {
     main.classList.add("sommar");
     main.classList.remove("vår");
     main.classList.remove("vinter");
@@ -166,19 +162,19 @@ function generateDates() {
   // Sommar slutar här
 
   // hösten börjar här
-  if (date.innerHTML === `september ${currentYear}`) {
+  if (date.innerHTML === `september ${dateObject.currentYear}`) {
     main.classList.add("höst");
     main.classList.remove("sommar");
     main.classList.remove("vår");
     main.classList.remove("vinter");
   }
-  if (date.innerHTML === `oktober ${currentYear}`) {
+  if (date.innerHTML === `oktober ${dateObject.currentYear}`) {
     main.classList.add("höst");
     main.classList.remove("sommar");
     main.classList.remove("vår");
     main.classList.remove("vinter");
   }
-  if (date.innerHTML === `november ${currentYear}`) {
+  if (date.innerHTML === `november ${dateObject.currentYear}`) {
     main.classList.add("höst");
     main.classList.remove("sommar");
     main.classList.remove("vår");
@@ -187,19 +183,19 @@ function generateDates() {
   // hösten slutar här
 
   // Vintern börjar här
-  if (date.innerHTML === `december ${currentYear}`) {
+  if (date.innerHTML === `december ${dateObject.currentYear}`) {
     main.classList.add("vinter");
     main.classList.remove("höst");
     main.classList.remove("vår");
     main.classList.remove("sommar");
   }
-  if (date.innerHTML === `januari ${currentYear}`) {
+  if (date.innerHTML === `januari ${dateObject.currentYear}`) {
     main.classList.add("vinter");
     main.classList.remove("höst");
     main.classList.remove("vår");
     main.classList.remove("sommar");
   }
-  if (date.innerHTML === `februari ${currentYear}`) {
+  if (date.innerHTML === `februari ${dateObject.currentYear}`) {
     main.classList.add("vinter");
     main.classList.remove("höst");
     main.classList.remove("vår");
@@ -211,11 +207,11 @@ function generateDates() {
     return year % 4 === 0 && (year % 100 !== 0 || year % 400 === 0);
   }
   //räknar ut midsommardagen
-  const june20th = new Date(currentYear, 5, 20);
+  const june20th = new Date(dateObject.currentYear, 5, 20);
   const daysUntilSaturday = (6 - june20th.getDay()) % 7;
 
   //räknar ut Alla helgons dag
-  const oct31st = new Date(currentYear, 9, 31);
+  const oct31st = new Date(dateObject.currentYear, 9, 31);
   const daysUntilSaturdayNovember = (6 - oct31st.getDay()) % 7;
 
   //Uträkningen bygger på "Meeus/Jones/Butcher" - Algoritmen
@@ -228,7 +224,7 @@ function generateDates() {
   //L is the number of days between March 21 and the Sunday on or before the Paschal full moon.
   //month and day are the month and day of Easter, respectively.
 
-  const Easter = getEaster(isLeapYear(currentYear));
+  const Easter = getEaster(isLeapYear(dateObject.currentYear));
   function getEaster(year) {
     let f = Math.floor,
       // Golden Number - 1
@@ -249,44 +245,44 @@ function generateDates() {
   }
 
   const redDays = [
-    new Date(currentYear, 0, 1), // Nyårsdagen
-    new Date(currentYear, 0, 6), // trettondagen
-    new Date(currentYear, 4, 1), // Första maj
-    new Date(currentYear, 5, 6), // Nationaldagen
-    new Date(currentYear, 11, 25), // Juldagen
-    new Date(currentYear, 11, 26), // Annandag jul
-    new Date(currentYear, 5, 20 + daysUntilSaturday), // Midsommardagen
-    new Date(currentYear, 9, 31 + daysUntilSaturdayNovember), // Alla helgons dag
+    new Date(dateObject.currentYear, 0, 1), // Nyårsdagen
+    new Date(dateObject.currentYear, 0, 6), // trettondagen
+    new Date(dateObject.currentYear, 4, 1), // Första maj
+    new Date(dateObject.currentYear, 5, 6), // Nationaldagen
+    new Date(dateObject.currentYear, 11, 25), // Juldagen
+    new Date(dateObject.currentYear, 11, 26), // Annandag jul
+    new Date(dateObject.currentYear, 5, 20 + daysUntilSaturday), // Midsommardagen
+    new Date(dateObject.currentYear, 9, 31 + daysUntilSaturdayNovember), // Alla helgons dag
 
     //långfredagen
     new Date(
-      currentYear,
-      getEaster(currentYear)[0] - 1,
-      getEaster(currentYear)[1] - 2
+      dateObject.currentYear,
+      getEaster(dateObject.currentYear)[0] - 1,
+      getEaster(dateObject.currentYear)[1] - 2
     ),
     //Påskdagen
     new Date(
-      currentYear,
-      getEaster(currentYear)[0] - 1,
-      getEaster(currentYear)[1] - 0
+        dateObject.currentYear,
+      getEaster(dateObject.currentYear)[0] - 1,
+      getEaster(dateObject.currentYear)[1] - 0
     ),
     //Annandag påsk
     new Date(
-      currentYear,
-      getEaster(currentYear)[0] - 1,
-      getEaster(currentYear)[1] + 1
+        dateObject.currentYear,
+      getEaster(dateObject.currentYear)[0] - 1,
+      getEaster(dateObject.currentYear)[1] + 1
     ),
     // Kristi himmelsfärdsdag
     new Date(
-      currentYear,
-      getEaster(currentYear)[0] - 1,
-      getEaster(currentYear)[1] + 39
+      dateObject.currentYear,
+      getEaster(dateObject.currentYear)[0] - 1,
+      getEaster(dateObject.currentYear)[1] + 39
     ),
     //Pingst
     new Date(
-      currentYear,
-      getEaster(currentYear)[0] - 1,
-      getEaster(currentYear)[1] + 49
+      dateObject.currentYear,
+      getEaster(dateObject.currentYear)[0] - 1,
+      getEaster(dateObject.currentYear)[1] + 49
     ),
   ];
 
@@ -294,8 +290,8 @@ function generateDates() {
   dayOfMonth.forEach((cell) => {
     // Hämtar datumet för den aktuella cellen
     const cellDate = new Date(
-      currentYear,
-      currentMonth,
+        dateObject.currentYear,
+        dateObject.currentMonth,
       parseInt(cell.textContent)
     );
     // Kollar om cellens datum finns i listan med röda dagar

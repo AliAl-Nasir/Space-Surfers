@@ -10,6 +10,8 @@ let currentMonth = currentDate.getMonth();
 let currentYear = currentDate.getFullYear();
 let dayIds = [];
 
+const dateObject = { currentDate, currentMonth, currentYear}
+
 const searchInput = document.querySelector("#search-input");
 const magniGlass = document.querySelector(".fa-regular");
 const calenderInput = document.querySelector("#search-input")
@@ -33,8 +35,11 @@ calenderInput.addEventListener("change", function(){
 
 
     let selectedDate = new Date(this.value);
+    dateObject.currentDate = selectedDate
 	let year = selectedDate.getFullYear();
 	let month = selectedDate.getMonth();
+	dateObject.currentMonth = month
+	dateObject.currentYear = year
 
 
     changeDates(year, month)
@@ -76,24 +81,24 @@ function changeDates(year, month) {
   }
 
    // vår börjar här
-   if (month === 2 ) {
+   if (month === 2 || month === 3 || month === 4) {
     main.classList.add("vår");
     main.classList.remove("vinter");
     main.classList.remove("sommar");
     main.classList.remove("höst");
   }
-  if (month === 3 ) {
-    main.classList.add("vår");
-    main.classList.remove("vinter");
-    main.classList.remove("sommar");
-    main.classList.remove("höst");
-  }
-  if (month === 4 ) {
-    main.classList.add("vår");
-    main.classList.remove("vinter");
-    main.classList.remove("sommar");
-    main.classList.remove("höst");
-  }
+  // if (month === 3 ) {
+  //   main.classList.add("vår");
+  //   main.classList.remove("vinter");
+  //   main.classList.remove("sommar");
+  //   main.classList.remove("höst");
+  // }
+  // if (month === 4 ) {
+  //   main.classList.add("vår");
+  //   main.classList.remove("vinter");
+  //   main.classList.remove("sommar");
+  //   main.classList.remove("höst");
+  // }
   // vår slutar här
 
   // Sommar börjar här
@@ -208,3 +213,4 @@ const idGenerator = () => {
 
 export { idGenerator, toggleSearchInput, updateIds, changeDates}
 export{calenderInput}
+export{ dateObject }
