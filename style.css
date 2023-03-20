@@ -3,7 +3,7 @@
     padding: 0;
     box-sizing: border-box;
     font-size: 20px;
-      font-family: "Inter", sans-serif;
+    font-family: "Inter", sans-serif;
 }
 
 html {
@@ -12,7 +12,7 @@ html {
 }
 
 body {
-    background-color: #1E212B;
+    background-color: #1e212b;
 }
 
 header {
@@ -24,7 +24,6 @@ header {
     color: white;
 }
 
-
 main {
     position: relative;
     display: flex;
@@ -33,12 +32,10 @@ main {
     margin: 0.5rem auto;
     padding: 0.5em 0.5em;
     text-align: center;
-    border: rgb(77, 76, 76) solid 2px; 
+    border: rgb(77, 76, 76) solid 2px;
     border-radius: 0.4rem;
     font-size: 20px;
 }
-
-
 
 .Kalender-container {
     margin-bottom: 1em;
@@ -49,55 +46,54 @@ main {
     gap: 1em;
 }
 
-.all-date-div{
+.all-date-div {
     display: flex;
     justify-content: center;
-    gap: 2em;
+    gap: 0.5em;
 }
 
 .date {
     max-width: 20rem;
     min-width: 20rem;
     background-color: #474545;
-    border-radius: .5rem;
+    border-radius: 0.5rem;
     color: white;
-    padding-top: .2em;
+    padding-top: 0.2em;
 }
 
-
-.search{
+.search {
     display: flex;
     align-items: center;
     gap: 0.5em;
     flex-wrap: wrap;
 }
 
-.flytta-höger{
+.flytta-höger {
     position: relative;
     font-size: 30px;
     cursor: pointer;
-    padding: .5em .5em;
-    transition: background, color .4s;
+    padding: 0.5em 0.5em;
+    transition: background, color 0.4s;
     border-radius: 50%;
     top: 0em;
     left: 0;
-    }
+}
 
 .flytta-höger:hover {
-    padding: .5em .5em;
-    background:  #474545;
+    padding: 0.5em 0.5em;
+    background: #474545;
     border-radius: 50%;
     color: white;
 }
 
-#search-input{
+#search-input {
     border-radius: 7px;
     border: none;
     width: 150px;
-    padding: .2em .2em;
+    padding: 0.2em 0.2em;
 }
 
-.popup-event{
+.popup-event {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -107,15 +103,15 @@ main {
     display: flex;
     flex-direction: column;
     border: 1px solid black;
-    border-radius: .30rem;
+    border-radius: 0.3rem;
     box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.5);
 }
 
-.popup-event .event-done-btn{
+.popup-event .event-done-btn {
     min-width: 4rem;
     margin-top: 1rem;
 }
-.event-done-btn:{
+.event-done-btn {
     background-color: rgb(38, 228, 28);
 }
 
@@ -127,29 +123,33 @@ main {
     min-width: 60%;
     min-height: 60%;
     background-color: white;
-    border-radius: .25rem;
+    border-radius: 0.25rem;
     border: 1px solid black;
     box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.5);
 }
 
 .close-contentbox-btn {
-   background-color: unset;
-   border: none;
-   color: red;
-   cursor: pointer;
-   font-size: 2rem;
-   margin: 2rem 0;
+    background-color: unset;
+    border: none;
+    color: red;
+    cursor: pointer;
+    font-size: 2rem;
+    margin: 2rem 0;
 }
 
-.flytta-höger{
+.flytta-höger {
     position: relative;
     animation-name: flytta;
     animation-duration: 4s;
 }
 
-@keyframes flytta{
-    from {left: 0;}
-    to {left: 5;}
+@keyframes flytta {
+    from {
+        left: 0;
+    }
+    to {
+        left: 5;
+    }
 }
 
 #prev {
@@ -164,7 +164,7 @@ main {
     text-decoration: none;
     text-align: center;
     position: relative;
-    transition: all .35s;
+    transition: all 0.35s;
 }
 
 #prev > span {
@@ -181,7 +181,7 @@ main {
     height: 100%;
     border-radius: 3px;
     background: rgba(71, 69, 69);
-    transition: all .35s;
+    transition: all 0.35s;
 }
 
 #prev:hover {
@@ -204,7 +204,7 @@ main {
     text-decoration: none;
     text-align: center;
     position: relative;
-    transition: all .35s;
+    transition: all 0.35s;
 }
 
 #next > span {
@@ -221,7 +221,7 @@ main {
     height: 100%;
     border-radius: 3px;
     background: #383838;
-    transition: all .35s;
+    transition: all 0.35s;
 }
 
 #next:hover {
@@ -247,7 +247,6 @@ main {
     box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.5);
 }
 
-
 /* .month-btn {
     border: none;
     padding: 0.3em 0.5em;
@@ -258,7 +257,6 @@ main {
     cursor: pointer;
 } */
 
-
 .date-container {
     position: relative;
     display: grid;
@@ -267,7 +265,6 @@ main {
 }
 
 .date-container div {
-    border:none;
     min-height: 3rem;
     border-radius: 0.25rem;
     background-color: white;
@@ -292,7 +289,7 @@ main {
 }
 
 .date-container > .current-date {
-    background-color: rgb(24, 152, 232);
+    background-color: rgb(72, 185, 255);
     color: white;
 }
 
@@ -304,16 +301,13 @@ main {
     background-color: hotpink;
 }
 
-
 .date-container > .red-day {
-    background-color: red;
+    background-color: rgb(255, 101, 101);
 }
 
 .blank-cell {
     opacity: 0;
 }
-
-
 
 /* Bakgrundsbilder till kalendern börjar här*/
 .vår {
@@ -327,25 +321,29 @@ main {
 .höst {
     background-image: url(/pictures/fall-autumn-red-season.jpg);
     background-size: cover;
-    
 }
 
 .vinter {
     background-image: url(/pictures/vinter.jpg);
     background-size: cover;
-    background-position: center ;
+    background-position: center;
 }
 /* Bakgrundsbilder till kalendern slutar här*/
 
-
+/* Ger röd dag till söndagar */
+.date-container :nth-child(7n + 7),
+.date-container :nth-child(7n + 14),
+.date-container :nth-child(7n + 21),
+.date-container :nth-child(7n + 28),
+.date-container :nth-child(7n + 35) {
+    background-color: rgb(255, 101, 101);
+}
 
 /* toggle klasser nedan */
 .hide-toggle {
     display: none;
 }
 /* toggle klasser slutar här*/
-
-
 
 /* Footer här nedan*/
 footer {
@@ -355,16 +353,27 @@ footer {
 }
 /* Footer slutar här */
 
-
 /* Media Q här nedan*/
 @media screen and (min-width: 480px) {
     .date-container div {
         height: 6rem;
+    }
+
+    .all-date-div {
+        display: flex;
+        justify-content: center;
+        gap: 1em;
     }
 }
 
 @media screen and (min-width: 768px) {
     .date-container div {
         height: 10rem;
+    }
+
+    .all-date-div {
+        display: flex;
+        justify-content: center;
+        gap: 2 em;
     }
 }
