@@ -26,16 +26,16 @@ header {
 
 
 main {
+    position: relative;
     display: flex;
     flex-direction: column;
     width: 95%;
-    margin: auto;
+    margin: 0.5rem auto;
     padding: 0.5em 0.5em;
     text-align: center;
     border: rgb(77, 76, 76) solid 2px; 
     border-radius: 0.4rem;
     font-size: 20px;
-    margin: 0.5em;
 }
 
 
@@ -98,21 +98,25 @@ main {
 }
 
 .popup-event{
-    
-    position: relative;
-    bottom: 37rem;
-    z-index: 1;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 1rem;
+    background-color: #6b6b6b;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid black;
+    border-radius: .30rem;
+    box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.5);
 }
-.event-btn{
-    justify-content: end;
-}
-.event-done-btn{
 
-    border: none;
-    padding: 0.4em;
-    
-    
-    
+.popup-event .event-done-btn{
+    min-width: 4rem;
+    margin-top: 1rem;
+}
+.event-done-btn:{
+    background-color: rgb(38, 228, 28);
 }
 
 .event-content-box {
@@ -120,10 +124,12 @@ main {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 70%;
-    height: 70%;
+    min-width: 60%;
+    min-height: 60%;
     background-color: white;
     border-radius: .25rem;
+    border: 1px solid black;
+    box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.5);
 }
 
 .close-contentbox-btn {
@@ -225,8 +231,6 @@ main {
 #next:hover:after {
     width: 100%;
 }
-   
-    
 
 .all-week-days {
     margin-bottom: 0.5em;
@@ -242,6 +246,7 @@ main {
     background-color: white;
     box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.5);
 }
+
 
 /* .month-btn {
     border: none;

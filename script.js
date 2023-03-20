@@ -103,120 +103,89 @@ for (let i = 0; i < allDateCells.length; i++) {
         plusBtn.classList.toggle("hide-toggle")
     })
 }
-//------------------------------------------------------
-let eventPopUp = document.createElement("section")
-eventPopUp.classList.add('popup-event')
-eventPopUp.innerHTML= `
-<textarea class="event-text-area" rows="5" cols="50"></textarea>
-<button class="event-done-btn">Klar</button>
-`
-let eventDoneBtn = document.querySelector(".event-done-btn")
-
-
-let eventContentBoxClose = document.createElement("button")
-eventContentBoxClose.innerHTML = `
-<i> &#10006;</i>
-`
-eventContentBoxClose.classList.add("close-contentbox-btn")
-eventPopUp.classList.toggle("hide-toggle")
-let eventContentBox = document.createElement("div")
-eventContentBox.classList.add("event-content-box")
-
-let eventContent = document.createElement("p")
-eventContent.classList.add("event-content")
-
-let eventIcon = document.createElement("button")
-eventIcon.innerHTML = `
-<i>&#9734;</i>
-`
 
 
 
-// ---------------------------------------------------
 
+
+
+
+
+//--------------------- kod för event funktionen börjar här ---------------------------------
 let allPlusBtn = document.querySelectorAll(".event-btn")
-allPlusBtn.forEach(plusBtn => {
-  plusBtn.addEventListener("click", event => {
-    event.stopPropagation()
-    
-    // Show the event popup
-    eventPopUp.classList.remove("hide-toggle")
-    
-    // Get the date cell element that the "plus" button belongs to
-    let dateCell = plusBtn.closest(".date-cell")
-    
-    // When the user clicks the "Klar" button in the event popup
-    eventDoneBtn.addEventListener("click", () => {
-      // Hide the event popup
-      eventPopUp.classList.add("hide-toggle")
-      
-      // Get the value of the event textarea
-      let eventText = textArea.value
-      
-      // Create an event icon button and add it to the date cell
-      let eventIcon = document.createElement("button")
-      eventIcon.innerHTML = `<i>&#9734;</i>`
-      dateCell.append(eventIcon)
-      
-      // Add a click event listener to the date cell to show the content box
-      dateCell.addEventListener("click", () => {
-        // Show the content box
-        eventContentBox.classList.remove("hide-toggle")
+for (let i=0; i < allPlusBtn.length; i++) {
+    let plusBtn = allPlusBtn[i]
+    plusBtn.addEventListener("click", event => {
+        let eventPopUp = document.createElement("section")
+        eventPopUp.classList.add('popup-event')
+        eventPopUp.innerHTML= `
+        <textarea class="event-text-area" rows="5" cols="50"></textarea>
+        <button class="event-done-btn">Klar</button>
+        `
+       
+        let textArea = eventPopUp.querySelector(".event-text-area")
+        event.stopPropagation()
+       
+        textArea.value = ""
+
+        main.append(eventPopUp)
+
         
-        // Set the content box text to the event text
-        eventContent.innerText = eventText
-      })
+        
+        let eventDoneBtn = document.querySelector(".event-done-btn")
+        eventDoneBtn.addEventListener("click", () => {
+
+            eventDoneBtn.style.background = "red";
+            //let textArea = document.querySelector(".event-text-area") det är extra?
+    
+            let eventContentBox = document.createElement("div")
+            eventContentBox.classList.add("event-content-box")
+            
+            let eventContentBoxClose = document.createElement("button")
+            eventContentBoxClose.innerHTML = `
+            <i> &#10006;</i>
+            `
+            eventContentBoxClose.classList.add("close-contentbox-btn")
+            eventPopUp.classList.toggle("hide-toggle")
+            
+            let eventContent = document.createElement("p")
+            eventContent.classList.add("event-content")
+            
+            eventContent.innerText =  ` ${textArea.value}`
+            let eventIcon = document.createElement("button")
+            eventIcon.innerHTML = `
+            <i>&#9734;</i>
+            `
+            eventContentBox.append(eventContentBoxClose)
+            eventContentBox.append(eventContent)
+            main.append(eventContentBox)
+            
+            eventPopUp.remove()
+            
+            plusBtn.parentElement.append(eventIcon)
+            plusBtn.classList.toggle("hide-toggle")
+
+            eventContentBoxClose.addEventListener("click", () => {
+                eventContentBox.classList.toggle("hide-toggle")
+                eventContentBox.scrollIntoView(true)
+            })
+        
+            eventIcon.addEventListener("click", event => {
+                event.stopPropagation()
+                eventContentBox.classList.toggle("hide-toggle")
+                eventContentBox.scrollIntoView(true)
+            })
+        })
+        main.addEventListener("click", () => {
+            eventPopUp.remove()
+        })
+        eventPopUp.addEventListener("click", event => {
+            event.stopPropagation()
+        })
     })
-  })
-})
 
-
-
-
-
-
-
-// let allPlusBtn = document.querySelectorAll(".event-btn")
-// for (let i=0; i < allPlusBtn.length; i++) {
-//     let plusBtn = allPlusBtn[i]
-//     main.append(eventPopUp)
-//     plusBtn.addEventListener("click", event => {
-//         let textArea = document.querySelector(".event-text-area")
-//         event.stopPropagation()
-//         eventPopUp.classList.toggle("hide-toggle")
-//         textArea.value = ""
-        
-//     })
-//     let eventDoneBtn = document.querySelector(".event-done-btn")
-//     eventDoneBtn.addEventListener("click", () => {
-//         let textArea = document.querySelector(".event-text-area")
-//         eventContentBox.append(eventContentBoxClose)
-//         eventContentBox.append(eventContent)
-//         eventContent.innerText =  ` ${textArea.value}`
-//         main.append(eventContentBox)
-
-       
-        
-//         eventPopUp.classList.toggle("hide-toggle")
-        
-       
-//         plusBtn.parentElement.append(eventIcon)
-//         plusBtn.classList.toggle("hide-toggle")
-        
-
-//     })
-
-//     eventContentBoxClose.addEventListener("click", () => {
-//         eventContentBox.classList.toggle("hide-toggle")
-//         eventContentBox.scrollIntoView(true)
-//     })
-
-//     eventIcon.addEventListener("click", event => {
-//         event.stopPropagation()
-//         eventContentBox.classList.toggle("hide-toggle")
-//         eventContentBox.scrollIntoView(true)
-//     })
-// }
+}
+// -----------------------------------------------------
 
 
 
