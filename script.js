@@ -2,6 +2,8 @@
 import { toggleSearchInput } from './searchdate.js';
 import { idGenerator } from './searchdate.js';
 import { updateIds } from './searchdate.js';
+import {calenderInput } from './searchdate.js';
+
 
 
 // Lista med månader
@@ -18,7 +20,7 @@ const monthNames = [
   "oktober",
   "november",
   "december",
- 
+
 ];
 
 
@@ -62,7 +64,19 @@ prevNextBtn.forEach((btn) => {
 
 //skapar en kalender för en given månad och år
 function generateDates() {
- 
+
+// 	calenderInput.addEventListener("change", function(){
+
+
+//     let selectedDate = new Date(this.value);
+// 	  let year = selectedDate.getFullYear();
+// 	  let month = selectedDate.getMonth();
+
+
+//     changeDates(year, month)
+
+// })
+
   //tömmer kalender
   dateContainer.innerHTML = "";
 
@@ -300,3 +314,5 @@ function generateDates() {
   toggleSearchInput();
 }
 
+export {dateContainer}
+export {monthNames}
