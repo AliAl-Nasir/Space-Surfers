@@ -13,17 +13,13 @@ const dateObject = { currentDate, currentMonth, currentYear };
 
 const searchInput = document.querySelector("#search-input");
 const magniGlass = document.querySelector(".fa-regular");
+const searchBox = document.querySelector(".search");
 const calenderInput = document.querySelector("#search-input");
 
-const toggleSearchInput = () => {
-    // init toggles
-    searchInput.classList.toggle("hide-toggle");
-
-    magniGlass.addEventListener("click", () => {
-        searchInput.classList.toggle("hide-toggle");
-        searchInput.focus();
-    });
-};
+magniGlass.addEventListener("click", (event) => {
+    searchBox.classList.toggle("active");
+    event.stopPropagation();
+});
 
 calenderInput.addEventListener("change", function () {
     let selectedDate = new Date(this.value);
@@ -158,6 +154,5 @@ prevNextBtn.forEach((btn) => {
     });
 });
 
-export { idGenerator, toggleSearchInput, updateIds, changeDates };
-export { calenderInput };
+export { idGenerator, updateIds, changeDates };
 export { dateObject };

@@ -1,8 +1,5 @@
-// import { addEvent } from "./Events.js";
-import { toggleSearchInput } from "./searchdate.js";
 import { idGenerator } from "./searchdate.js";
 import { updateIds } from "./searchdate.js";
-import { calenderInput } from "./searchdate.js";
 import { dateObject } from "./searchdate.js";
 
 // Lista med månader
@@ -21,9 +18,6 @@ const monthNames = [
     "december",
 ];
 
-//hämta element från DOM
-// const days = document.querySelectorAll(".current-month-cell");
-// const body = document.querySelector("body");
 const dateContainer = document.querySelector(".date-container");
 const date = document.querySelector(".date");
 const prevNextBtn = document.querySelectorAll(".Kalender-container .month-btn");
@@ -51,7 +45,6 @@ prevNextBtn.forEach((btn) => {
         generateDates();
         updateIds();
         idGenerator();
-        toggleSearchInput();
     });
 });
 
@@ -265,7 +258,6 @@ function generateDates() {
     });
     idGenerator();
     updateIds();
-    toggleSearchInput();
 }
 
 export { dateContainer };
