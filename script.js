@@ -58,11 +58,11 @@ prevNextBtn.forEach((btn) => {
 
 //skapar en kalender för en given månad och år
 function generateDates() {
-    // 	calenderInput.addEventListener("change", function(){
+    //  calenderInput.addEventListener("change", function(){
 
     //     let selectedDate = new Date(this.value);
-    // 	  let year = selectedDate.getFullYear();
-    // 	  let month = selectedDate.getMonth();
+    //    let year = selectedDate.getFullYear();
+    //    let month = selectedDate.getMonth();
 
     //     changeDates(year, month)
 
