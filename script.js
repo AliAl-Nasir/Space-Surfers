@@ -103,7 +103,12 @@ function generateDates() {
         const dateCell = document.createElement("div");
         dateCell.textContent = currentDate.getDate();
         dateCell.classList.add("date-cell", "current-month-cell");
+        const plusBtn = document.createElement("button");
+        plusBtn.innerHTML = "<i> &#10010; </i>";
 
+        plusBtn.classList.add("event-btn");
+        plusBtn.classList.toggle("hide-toggle", true);
+        dateCell.appendChild(plusBtn);
         dateContainer.appendChild(dateCell);
         currentDate.setDate(currentDate.getDate() + 1);
     }
