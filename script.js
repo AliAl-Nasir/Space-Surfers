@@ -22,11 +22,10 @@ const monthNames = [
 ];
 
 //hämta element från DOM
-const days = document.querySelectorAll(".current-month-cell");
-const body = document.querySelector("body");
+// const days = document.querySelectorAll(".current-month-cell");
+// const body = document.querySelector("body");
 const dateContainer = document.querySelector(".date-container");
 const date = document.querySelector(".date");
-const dateYear = document.querySelector(".date-year");
 const prevNextBtn = document.querySelectorAll(".Kalender-container .month-btn");
 const main = document.querySelector("main");
 
@@ -93,96 +92,10 @@ function generateDates() {
         const dateCell = document.createElement("div");
         dateCell.textContent = currentDate.getDate();
         dateCell.classList.add("date-cell", "current-month-cell");
-        const plusBtn = document.createElement("button");
-        plusBtn.innerHTML = "<i> &#10010; </i>";
 
-        plusBtn.classList.add("event-btn");
-        plusBtn.classList.toggle("hide-toggle", true);
-        dateCell.appendChild(plusBtn);
         dateContainer.appendChild(dateCell);
         currentDate.setDate(currentDate.getDate() + 1);
     }
-    let allDateCells = document.querySelectorAll(".date-cell");
-    for (let i = 0; i < allDateCells.length; i++) {
-        let dateCell = allDateCells[i];
-        dateCell.addEventListener("click", () => {
-            let plusBtn = dateCell.lastChild;
-            plusBtn.classList.toggle("hide-toggle");
-        });
-    }
-
-    //--------------------- kod för event funktionen börjar här ---------------------------------
-    let allPlusBtn = document.querySelectorAll(".event-btn");
-    for (let i = 0; i < allPlusBtn.length; i++) {
-        let plusBtn = allPlusBtn[i];
-        plusBtn.addEventListener("click", (event) => {
-            let eventPopUp = document.createElement("section");
-            eventPopUp.classList.add("popup-event");
-            eventPopUp.innerHTML = `
-        <textarea class="event-text-area" rows="5" cols="50"></textarea>
-        <button class="event-done-btn">Klar</button>
-        `;
-
-            let textArea = eventPopUp.querySelector(".event-text-area");
-            event.stopPropagation();
-
-            textArea.value = "";
-
-            main.append(eventPopUp);
-
-            let eventDoneBtn = document.querySelector(".event-done-btn");
-            eventDoneBtn.addEventListener("click", () => {
-                eventDoneBtn.style.background = "red";
-                //let textArea = document.querySelector(".event-text-area") det är extra?
-
-                let eventContentBox = document.createElement("div");
-                eventContentBox.classList.add("event-content-box");
-
-                let eventContentBoxClose = document.createElement("button");
-                eventContentBoxClose.innerHTML = `
-            <i> &#10006;</i>
-            `;
-                eventContentBoxClose.classList.add("close-contentbox-btn");
-                eventPopUp.classList.toggle("hide-toggle");
-
-                let eventContent = document.createElement("p");
-                eventContent.classList.add("event-content");
-
-                eventContent.innerText = ` ${textArea.value}`;
-                let eventIcon = document.createElement("button");
-                eventIcon.innerHTML = `
-            <i>&#9734;</i>
-            `;
-                eventContentBox.append(eventContentBoxClose);
-                eventContentBox.append(eventContent);
-                main.append(eventContentBox);
-
-                eventPopUp.remove();
-
-                plusBtn.parentElement.append(eventIcon);
-                plusBtn.classList.toggle("hide-toggle");
-
-                eventContentBoxClose.addEventListener("click", () => {
-                    eventContentBox.classList.toggle("hide-toggle");
-                    eventContentBox.scrollIntoView(true);
-                });
-
-                eventIcon.addEventListener("click", (event) => {
-                    event.stopPropagation();
-                    eventContentBox.classList.toggle("hide-toggle");
-                    eventContentBox.scrollIntoView(true);
-                });
-            });
-            main.addEventListener("click", () => {
-                eventPopUp.remove();
-            });
-            eventPopUp.addEventListener("click", (event) => {
-                event.stopPropagation();
-            });
-        });
-    }
-    // -----------------------------------------------------
-
     //itererar över månaden och väljer ut "idag" och ger klassen current-date
     const today = new Date();
     const dateCells = document.querySelectorAll(".date-cell");
