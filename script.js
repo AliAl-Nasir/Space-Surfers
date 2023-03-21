@@ -112,6 +112,7 @@ function generateDates() {
         dateContainer.appendChild(dateCell);
         currentDate.setDate(currentDate.getDate() + 1);
     }
+    //--------------------- kod för event funktionen börjar här ---------------------------------
     let allDateCells = document.querySelectorAll(".date-cell");
     for (let i = 0; i < allDateCells.length; i++) {
         let dateCell = allDateCells[i];
@@ -121,7 +122,6 @@ function generateDates() {
         });
     }
 
-    //--------------------- kod för event funktionen börjar här ---------------------------------
     let allPlusBtn = document.querySelectorAll(".event-btn");
     for (let i = 0; i < allPlusBtn.length; i++) {
         let plusBtn = allPlusBtn[i];
@@ -132,10 +132,10 @@ function generateDates() {
         <textarea class="event-text-area" rows="5" cols="50"></textarea>
         <button class="event-done-btn">Klar</button>
         `;
-            
+
             let textArea = eventPopUp.querySelector(".event-text-area");
             event.stopPropagation();
-           
+
             textArea.value = "";
 
             main.append(eventPopUp);
@@ -143,10 +143,11 @@ function generateDates() {
             let eventDoneBtn = document.querySelector(".event-done-btn");
             eventDoneBtn.addEventListener("click", () => {
                 eventDoneBtn.style.background = "red";
-                //let textArea = document.querySelector(".event-text-area") det är extra?
 
                 let eventContentBox = document.createElement("div");
                 eventContentBox.classList.add("event-content-box");
+
+                let eventContent = document.createElement("p");
 
                 let eventContentBoxClose = document.createElement("button");
                 eventContentBoxClose.innerHTML = `
@@ -154,21 +155,14 @@ function generateDates() {
             `;
                 eventContentBoxClose.classList.add("close-contentbox-btn");
                 eventPopUp.classList.toggle("hide-toggle");
-                // lockal storage
-                let eventContent = document.createElement("p");
-                eventContent.classList.add("event-content");
-                 event.addEventListener('input' , (event) =>{
-                const content = event.target.value
-                localStorage.setItem('myTextArea' , content)
-                event.stopPropagation()
-            })
-            textArea.value = localStorage.getItem("myTextArea") || "";
-            //-----------------------------------
+
                 eventContent.innerText = ` ${textArea.value}`;
+
                 let eventIcon = document.createElement("button");
                 eventIcon.innerHTML = `
             <i>&#9734;</i>
             `;
+
                 eventContentBox.append(eventContentBoxClose);
                 eventContentBox.append(eventContent);
                 main.append(eventContentBox);
