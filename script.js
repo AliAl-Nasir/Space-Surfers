@@ -58,16 +58,6 @@ prevNextBtn.forEach((btn) => {
 
 //skapar en kalender för en given månad och år
 function generateDates() {
-    // 	calenderInput.addEventListener("change", function(){
-
-    //     let selectedDate = new Date(this.value);
-    // 	  let year = selectedDate.getFullYear();
-    // 	  let month = selectedDate.getMonth();
-
-    //     changeDates(year, month)
-
-    // })
-
     //tömmer kalender
     dateContainer.innerHTML = "";
 
@@ -209,89 +199,54 @@ function generateDates() {
             cell.classList.remove("current-date");
         }
     });
-    // vår börjar här
-    if (date.textContent === `mars ${dateObject.currentYear}`) {
+
+    // vårtema
+    if (
+        date.textContent === `mars ${dateObject.currentYear}` ||
+        date.textContent === `april ${dateObject.currentYear}` ||
+        date.textContent === `maj ${dateObject.currentYear}`
+    ) {
         main.classList.add("vår");
         main.classList.remove("vinter");
         main.classList.remove("sommar");
         main.classList.remove("höst");
     }
-    if (date.textContent === `april ${dateObject.currentYear}`) {
-        main.classList.add("vår");
-        main.classList.remove("vinter");
-        main.classList.remove("sommar");
-        main.classList.remove("höst");
-    }
-    if (date.textContent === `maj ${dateObject.currentYear}`) {
-        main.classList.add("vår");
-        main.classList.remove("vinter");
-        main.classList.remove("sommar");
-        main.classList.remove("höst");
-    }
-    // vår slutar här
 
-    // Sommar börjar här
-    if (date.innerHTML === `juni ${dateObject.currentYear}`) {
+    // Sommartema
+    if (
+        date.textContent === `juni ${dateObject.currentYear}` ||
+        date.textContent === `juli ${dateObject.currentYear}` ||
+        date.textContent === `augusti ${dateObject.currentYear}`
+    ) {
         main.classList.add("sommar");
         main.classList.remove("vår");
         main.classList.remove("vinter");
         main.classList.remove("höst");
     }
-    if (date.innerHTML === `juli ${dateObject.currentYear}`) {
-        main.classList.add("sommar");
-        main.classList.remove("vår");
-        main.classList.remove("vinter");
-        main.classList.remove("höst");
-    }
-    if (date.innerHTML === `augusti ${dateObject.currentYear}`) {
-        main.classList.add("sommar");
-        main.classList.remove("vår");
-        main.classList.remove("vinter");
-        main.classList.remove("höst");
-    }
-    // Sommar slutar här
 
-    // hösten börjar här
-    if (date.innerHTML === `september ${dateObject.currentYear}`) {
+    // hösttema
+    if (
+        date.textContent === `september ${dateObject.currentYear}` ||
+        date.textContent === `oktober ${dateObject.currentYear}` ||
+        date.textContent === `november ${dateObject.currentYear}`
+    ) {
         main.classList.add("höst");
         main.classList.remove("sommar");
         main.classList.remove("vår");
         main.classList.remove("vinter");
     }
-    if (date.innerHTML === `oktober ${dateObject.currentYear}`) {
-        main.classList.add("höst");
-        main.classList.remove("sommar");
-        main.classList.remove("vår");
-        main.classList.remove("vinter");
-    }
-    if (date.innerHTML === `november ${dateObject.currentYear}`) {
-        main.classList.add("höst");
-        main.classList.remove("sommar");
-        main.classList.remove("vår");
-        main.classList.remove("vinter");
-    }
-    // hösten slutar här
 
-    // Vintern börjar här
-    if (date.innerHTML === `december ${dateObject.currentYear}`) {
+    // Vintertema
+    if (
+        date.textContent === `december ${dateObject.currentYear}` ||
+        date.textContent === `januari ${dateObject.currentYear}` ||
+        date.textContent === `februari ${dateObject.currentYear}`
+    ) {
         main.classList.add("vinter");
         main.classList.remove("höst");
         main.classList.remove("vår");
         main.classList.remove("sommar");
     }
-    if (date.innerHTML === `januari ${dateObject.currentYear}`) {
-        main.classList.add("vinter");
-        main.classList.remove("höst");
-        main.classList.remove("vår");
-        main.classList.remove("sommar");
-    }
-    if (date.innerHTML === `februari ${dateObject.currentYear}`) {
-        main.classList.add("vinter");
-        main.classList.remove("höst");
-        main.classList.remove("vår");
-        main.classList.remove("sommar");
-    }
-    // Vintern slutar här
 
     function isLeapYear(year) {
         return year % 4 === 0 && (year % 100 !== 0 || year % 400 === 0);
