@@ -132,10 +132,10 @@ function generateDates() {
         <textarea class="event-text-area" rows="5" cols="50"></textarea>
         <button class="event-done-btn">Klar</button>
         `;
-
+            
             let textArea = eventPopUp.querySelector(".event-text-area");
             event.stopPropagation();
-
+           
             textArea.value = "";
 
             main.append(eventPopUp);
@@ -154,10 +154,16 @@ function generateDates() {
             `;
                 eventContentBoxClose.classList.add("close-contentbox-btn");
                 eventPopUp.classList.toggle("hide-toggle");
-
+                // lockal storage
                 let eventContent = document.createElement("p");
                 eventContent.classList.add("event-content");
-
+                 event.addEventListener('input' , (event) =>{
+                const content = event.target.value
+                localStorage.setItem('myTextArea' , content)
+                event.stopPropagation()
+            })
+            textArea.value = localStorage.getItem("myTextArea") || "";
+            //-----------------------------------
                 eventContent.innerText = ` ${textArea.value}`;
                 let eventIcon = document.createElement("button");
                 eventIcon.innerHTML = `
