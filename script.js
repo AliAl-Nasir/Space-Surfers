@@ -1,8 +1,5 @@
-// import { addEvent } from "./Events.js";
-import { toggleSearchInput } from "./searchdate.js";
 import { idGenerator } from "./searchdate.js";
 import { updateIds } from "./searchdate.js";
-import { calenderInput } from "./searchdate.js";
 import { dateObject } from "./searchdate.js";
 
 // Lista med månader
@@ -21,12 +18,8 @@ const monthNames = [
     "december",
 ];
 
-//hämta element från DOM
-const days = document.querySelectorAll(".current-month-cell");
-const body = document.querySelector("body");
 const dateContainer = document.querySelector(".date-container");
 const date = document.querySelector(".date");
-const dateYear = document.querySelector(".date-year");
 const prevNextBtn = document.querySelectorAll(".Kalender-container .month-btn");
 const main = document.querySelector("main");
 
@@ -52,22 +45,11 @@ prevNextBtn.forEach((btn) => {
         generateDates();
         updateIds();
         idGenerator();
-        toggleSearchInput();
     });
 });
 
 //skapar en kalender för en given månad och år
 function generateDates() {
-    //  calenderInput.addEventListener("change", function(){
-
-    //     let selectedDate = new Date(this.value);
-    //    let year = selectedDate.getFullYear();
-    //    let month = selectedDate.getMonth();
-
-    //     changeDates(year, month)
-
-    // })
-
     //tömmer kalender
     dateContainer.innerHTML = "";
 
@@ -103,96 +85,10 @@ function generateDates() {
         const dateCell = document.createElement("div");
         dateCell.textContent = currentDate.getDate();
         dateCell.classList.add("date-cell", "current-month-cell");
-        const plusBtn = document.createElement("button");
-        plusBtn.innerHTML = "<i> &#10010; </i>";
 
-        plusBtn.classList.add("event-btn");
-        plusBtn.classList.toggle("hide-toggle", true);
-        dateCell.appendChild(plusBtn);
         dateContainer.appendChild(dateCell);
         currentDate.setDate(currentDate.getDate() + 1);
     }
-    let allDateCells = document.querySelectorAll(".date-cell");
-    for (let i = 0; i < allDateCells.length; i++) {
-        let dateCell = allDateCells[i];
-        dateCell.addEventListener("click", () => {
-            let plusBtn = dateCell.lastChild;
-            plusBtn.classList.toggle("hide-toggle");
-        });
-    }
-
-    //--------------------- kod för event funktionen börjar här ---------------------------------
-    let allPlusBtn = document.querySelectorAll(".event-btn");
-    for (let i = 0; i < allPlusBtn.length; i++) {
-        let plusBtn = allPlusBtn[i];
-        plusBtn.addEventListener("click", (event) => {
-            let eventPopUp = document.createElement("section");
-            eventPopUp.classList.add("popup-event");
-            eventPopUp.innerHTML = `
-        <textarea class="event-text-area" rows="5" cols="50"></textarea>
-        <button class="event-done-btn">Klar</button>
-        `;
-
-            let textArea = eventPopUp.querySelector(".event-text-area");
-            event.stopPropagation();
-
-            textArea.value = "";
-
-            main.append(eventPopUp);
-
-            let eventDoneBtn = document.querySelector(".event-done-btn");
-            eventDoneBtn.addEventListener("click", () => {
-                eventDoneBtn.style.background = "red";
-                //let textArea = document.querySelector(".event-text-area") det är extra?
-
-                let eventContentBox = document.createElement("div");
-                eventContentBox.classList.add("event-content-box");
-
-                let eventContentBoxClose = document.createElement("button");
-                eventContentBoxClose.innerHTML = `
-            <i> &#10006;</i>
-            `;
-                eventContentBoxClose.classList.add("close-contentbox-btn");
-                eventPopUp.classList.toggle("hide-toggle");
-
-                let eventContent = document.createElement("p");
-                eventContent.classList.add("event-content");
-
-                eventContent.innerText = ` ${textArea.value}`;
-                let eventIcon = document.createElement("button");
-                eventIcon.innerHTML = `
-            <i>&#9734;</i>
-            `;
-                eventContentBox.append(eventContentBoxClose);
-                eventContentBox.append(eventContent);
-                main.append(eventContentBox);
-
-                eventPopUp.remove();
-
-                plusBtn.parentElement.append(eventIcon);
-                plusBtn.classList.toggle("hide-toggle");
-
-                eventContentBoxClose.addEventListener("click", () => {
-                    eventContentBox.classList.toggle("hide-toggle");
-                    eventContentBox.scrollIntoView(true);
-                });
-
-                eventIcon.addEventListener("click", (event) => {
-                    event.stopPropagation();
-                    eventContentBox.classList.toggle("hide-toggle");
-                    eventContentBox.scrollIntoView(true);
-                });
-            });
-            main.addEventListener("click", () => {
-                eventPopUp.remove();
-            });
-            eventPopUp.addEventListener("click", (event) => {
-                event.stopPropagation();
-            });
-        });
-    }
-    // -----------------------------------------------------
-
     //itererar över månaden och väljer ut "idag" och ger klassen current-date
     const today = new Date();
     const dateCells = document.querySelectorAll(".date-cell");
@@ -209,89 +105,54 @@ function generateDates() {
             cell.classList.remove("current-date");
         }
     });
-    // vår börjar här
-    if (date.textContent === `mars ${dateObject.currentYear}`) {
+
+    // vårtema
+    if (
+        date.textContent === `mars ${dateObject.currentYear}` ||
+        date.textContent === `april ${dateObject.currentYear}` ||
+        date.textContent === `maj ${dateObject.currentYear}`
+    ) {
         main.classList.add("vår");
         main.classList.remove("vinter");
         main.classList.remove("sommar");
         main.classList.remove("höst");
     }
-    if (date.textContent === `april ${dateObject.currentYear}`) {
-        main.classList.add("vår");
-        main.classList.remove("vinter");
-        main.classList.remove("sommar");
-        main.classList.remove("höst");
-    }
-    if (date.textContent === `maj ${dateObject.currentYear}`) {
-        main.classList.add("vår");
-        main.classList.remove("vinter");
-        main.classList.remove("sommar");
-        main.classList.remove("höst");
-    }
-    // vår slutar här
 
-    // Sommar börjar här
-    if (date.innerHTML === `juni ${dateObject.currentYear}`) {
+    // Sommartema
+    if (
+        date.textContent === `juni ${dateObject.currentYear}` ||
+        date.textContent === `juli ${dateObject.currentYear}` ||
+        date.textContent === `augusti ${dateObject.currentYear}`
+    ) {
         main.classList.add("sommar");
         main.classList.remove("vår");
         main.classList.remove("vinter");
         main.classList.remove("höst");
     }
-    if (date.innerHTML === `juli ${dateObject.currentYear}`) {
-        main.classList.add("sommar");
-        main.classList.remove("vår");
-        main.classList.remove("vinter");
-        main.classList.remove("höst");
-    }
-    if (date.innerHTML === `augusti ${dateObject.currentYear}`) {
-        main.classList.add("sommar");
-        main.classList.remove("vår");
-        main.classList.remove("vinter");
-        main.classList.remove("höst");
-    }
-    // Sommar slutar här
 
-    // hösten börjar här
-    if (date.innerHTML === `september ${dateObject.currentYear}`) {
+    // hösttema
+    if (
+        date.textContent === `september ${dateObject.currentYear}` ||
+        date.textContent === `oktober ${dateObject.currentYear}` ||
+        date.textContent === `november ${dateObject.currentYear}`
+    ) {
         main.classList.add("höst");
         main.classList.remove("sommar");
         main.classList.remove("vår");
         main.classList.remove("vinter");
     }
-    if (date.innerHTML === `oktober ${dateObject.currentYear}`) {
-        main.classList.add("höst");
-        main.classList.remove("sommar");
-        main.classList.remove("vår");
-        main.classList.remove("vinter");
-    }
-    if (date.innerHTML === `november ${dateObject.currentYear}`) {
-        main.classList.add("höst");
-        main.classList.remove("sommar");
-        main.classList.remove("vår");
-        main.classList.remove("vinter");
-    }
-    // hösten slutar här
 
-    // Vintern börjar här
-    if (date.innerHTML === `december ${dateObject.currentYear}`) {
+    // Vintertema
+    if (
+        date.textContent === `december ${dateObject.currentYear}` ||
+        date.textContent === `januari ${dateObject.currentYear}` ||
+        date.textContent === `februari ${dateObject.currentYear}`
+    ) {
         main.classList.add("vinter");
         main.classList.remove("höst");
         main.classList.remove("vår");
         main.classList.remove("sommar");
     }
-    if (date.innerHTML === `januari ${dateObject.currentYear}`) {
-        main.classList.add("vinter");
-        main.classList.remove("höst");
-        main.classList.remove("vår");
-        main.classList.remove("sommar");
-    }
-    if (date.innerHTML === `februari ${dateObject.currentYear}`) {
-        main.classList.add("vinter");
-        main.classList.remove("höst");
-        main.classList.remove("vår");
-        main.classList.remove("sommar");
-    }
-    // Vintern slutar här
 
     function isLeapYear(year) {
         return year % 4 === 0 && (year % 100 !== 0 || year % 400 === 0);
@@ -397,7 +258,6 @@ function generateDates() {
     });
     idGenerator();
     updateIds();
-    toggleSearchInput();
 }
 
 export { dateContainer };

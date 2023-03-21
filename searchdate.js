@@ -13,17 +13,13 @@ const dateObject = { currentDate, currentMonth, currentYear };
 
 const searchInput = document.querySelector("#search-input");
 const magniGlass = document.querySelector(".fa-regular");
+const searchBox = document.querySelector(".search");
 const calenderInput = document.querySelector("#search-input");
 
-const toggleSearchInput = () => {
-    // init toggles
-    // searchInput.classList.toggle("hide-toggle", );
-
-    magniGlass.addEventListener("click", () => {
-        // searchInput.classList.toggle("hide-toggle");
-        searchInput.focus();
-    });
-};
+magniGlass.addEventListener("click", (event) => {
+    searchBox.classList.toggle("active");
+    event.stopPropagation();
+});
 
 calenderInput.addEventListener("change", function () {
     let selectedDate = new Date(this.value);
@@ -71,89 +67,53 @@ function changeDates(year, month) {
         currentDate.setDate(currentDate.getDate() + 1);
     }
 
-    // vår börjar här
+    //itererar över månaden och väljer ut "idag" och ger klassen current-date
+    const today = new Date();
+    const dateCells = document.querySelectorAll(".date-cell");
+    dateCells.forEach((cell) => {
+        const cellDate = new Date(
+            dateObject.currentYear,
+            dateObject.currentMonth,
+            parseInt(cell.textContent)
+        );
+        if (cellDate.toDateString() === today.toDateString()) {
+            cell.classList.add("current-date");
+        } else {
+            cell.classList.remove("current-date");
+        }
+    });
+
+    // vårtema
     if (month === 2 || month === 3 || month === 4) {
         main.classList.add("vår");
         main.classList.remove("vinter");
         main.classList.remove("sommar");
         main.classList.remove("höst");
     }
-    // if (month === 3 ) {
-    //   main.classList.add("vår");
-    //   main.classList.remove("vinter");
-    //   main.classList.remove("sommar");
-    //   main.classList.remove("höst");
-    // }
-    // if (month === 4 ) {
-    //   main.classList.add("vår");
-    //   main.classList.remove("vinter");
-    //   main.classList.remove("sommar");
-    //   main.classList.remove("höst");
-    // }
-    // vår slutar här
 
-    // Sommar börjar här
-    if (month === 5) {
+    // Sommartema
+    if (month === 5 || month === 6 || month === 7) {
         main.classList.add("sommar");
         main.classList.remove("vår");
         main.classList.remove("vinter");
         main.classList.remove("höst");
     }
-    if (month === 6) {
-        main.classList.add("sommar");
-        main.classList.remove("vår");
-        main.classList.remove("vinter");
-        main.classList.remove("höst");
-    }
-    if (month === 7) {
-        main.classList.add("sommar");
-        main.classList.remove("vår");
-        main.classList.remove("vinter");
-        main.classList.remove("höst");
-    }
-    // Sommar slutar här
 
-    // hösten börjar här
-    if (month === 8) {
+    // hösttema
+    if (month === 8 || month === 9 || month === 10) {
         main.classList.add("höst");
         main.classList.remove("sommar");
         main.classList.remove("vår");
         main.classList.remove("vinter");
     }
-    if (month === 9) {
-        main.classList.add("höst");
-        main.classList.remove("sommar");
-        main.classList.remove("vår");
-        main.classList.remove("vinter");
-    }
-    if (month === 10) {
-        main.classList.add("höst");
-        main.classList.remove("sommar");
-        main.classList.remove("vår");
-        main.classList.remove("vinter");
-    }
-    // hösten slutar här
 
-    // Vintern börjar här
-    if (month === 11) {
+    // Vintertema
+    if (month === 11 || month === 0 || month === 1) {
         main.classList.add("vinter");
         main.classList.remove("höst");
         main.classList.remove("vår");
         main.classList.remove("sommar");
     }
-    if (month === 0) {
-        main.classList.add("vinter");
-        main.classList.remove("höst");
-        main.classList.remove("vår");
-        main.classList.remove("sommar");
-    }
-    if (month === 1) {
-        main.classList.add("vinter");
-        main.classList.remove("höst");
-        main.classList.remove("vår");
-        main.classList.remove("sommar");
-    }
-    // Vintern slutar här
 }
 
 const idGenerator = () => {
@@ -194,6 +154,5 @@ prevNextBtn.forEach((btn) => {
     });
 });
 
-export { idGenerator, toggleSearchInput, updateIds, changeDates };
-export { calenderInput };
+export { idGenerator, updateIds, changeDates };
 export { dateObject };
